@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="5cm"
+   height="5cm"
+   viewBox="0 0 50 49.999999"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="signo_pregunta.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="6.2217172"
+     inkscape:cx="111.38404"
+     inkscape:cy="139.02914"
+     inkscape:window-width="3840"
+     inkscape:window-height="2066"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     width="5mm"
+     units="cm" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1016" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       aria-label="?"
+       transform="matrix(0.97234715,0,0,0.96203203,0,1.5812997)"
+       id="text2909"
+       style="font-size:66.7468px;font-family:'Embassy BT';-inkscape-font-specification:'Embassy BT, Normal';fill:none;stroke:#000000;stroke-width:1.66869">
+      <path
+         d="m 22.025066,36.737903 q -0.03259,-1.173284 -0.03259,-1.759926 0,-3.454669 0.977736,-5.964192 0.717007,-1.89029 2.313976,-3.813172 1.173284,-1.401422 4.204267,-4.073901 3.063574,-2.705071 3.976127,-4.30204 0.912554,-1.59697 0.912554,-3.48726 0,-3.4220774 -2.672479,-5.9967832 -2.672479,-2.607297 -6.550834,-2.607297 -3.747989,0 -6.257513,2.3465673 -2.509523,2.3465673 -3.291712,7.3330229 L 9.5752227,13.695915 Q 10.390003,7.0147167 14.398722,3.4622745 q 4.04131,-3.55244217 10.657327,-3.55244217 7.00711,0 11.178786,3.81317187 4.171675,3.8131719 4.171675,9.2233128 0,3.128757 -1.466605,5.768645 -1.466604,2.639888 -5.736053,6.420469 -2.868027,2.542114 -3.74799,3.747989 -0.879962,1.205875 -1.303648,2.770253 -0.423686,1.564379 -0.488868,5.08423 z M 21.666563,48.50333 v -6.681198 h 6.681198 v 6.681198 z"
+         style="-inkscape-font-specification:Arial;fill:none;stroke:#000000"
+         id="path9593" />
+    </g>
+  </g>
+</svg>

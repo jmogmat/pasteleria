@@ -1,0 +1,88 @@
+{
+    "productos": [
+        {
+            "id": 0,
+            "productName": "Bollo de Pan Artesano",
+            "description": "Fabricado con ingredientes de máxima calidad, y en horno de leña a fuego lento usando la mejor masa madre del mercado.",
+            "price": "0.90",
+            "image": "images/imagenes_de_pan/pan_redondo.jpg"
+        },
+        {
+            "id": 1,
+            "productName": "Barras de Pan de ayer",
+            "description": "¿Qué mejor que unas tostadas por la mañana con el pan sobrante del día anterior? Comprando este producto evitas que se desperdicie comida",
+            "price": "0.4",
+            "image": "images/imagenes_de_pan/barras_de_pan.jpg"
+        },
+        {
+            "id": 2,
+            "productName": "Pan artesano de Cea",
+            "description": "Pan con una textura crugiente en su exterior y un interior blando, podemos decir que es el mejor pan traído desde el más allá.",
+            "price": "1.2",
+            "image": "images/imagenes_de_pan/pan_de_cea.jpg"
+        },
+        {
+            "id": 3,
+            "productName": "Pan Integral",
+            "description": "Pan de cereales y centeno, para evitar el estreñimiento. Tiene un alto contenido en fibra y se elabora siguiendo la receta tradicional.",
+            "price": "1.2",
+            "image": "images/imagenes_de_pan/pan_integral.jpg"
+        },
+        {
+            "id": 4,
+            "productName": "Croissants",
+            "description": "Sabrosos croissants de mantequilla y crujientes. Recién hordeados todas las mañanas para el disfrute de todos nuestros clientes.",
+            "price": "1.2",
+            "image": "images/imagenes_de_pasteles/croissants.jpg"
+        },
+        {
+            "id": 5,
+            "productName": "Brownies extra de chocolate",
+            "description": "Receta especial de la casa, con chocolate belga y nueces para los verdaderos amantes del chocolate debido principalmente al extra de chocolate que le añadimos.",
+            "price": "1.2",
+            "image": "images/imagenes_de_pasteles/brownie-de-chocolate.jpg"
+        },
+        {
+            "id": 6,
+            "productName": "Pastelitos Tuga",
+            "description": "La mejor replica de pastelitos de belén. Elaborados con una receta del siglo XIX del Monasterio de los Jerónimos que esta situado en Belem (Lisboa).",
+            "price": "1.2",
+            "image": "images/imagenes_de_pasteles/pasteles_de_nata.jpg"
+        },
+        {
+            "id": 7,
+            "productName": "Tarta de la abuela original",
+            "description": "La preferida de todos y todas, con galletas de verdad y chocolate de una calidad deluxe. Este postre se hace diaremente para garantizar la frescura del mismo.",
+            "price": "1.2",
+            "image": "images/imagenes_de_pasteles/tarta_abuela.jpg"
+        },
+        {
+            "id": 8,
+            "productName": "Tarta de San Marcos",
+            "description": "Una de las tartas que nunca falta en cumpleaños, reuniones, ... principalmente debido a su textura suave, gusta tanto a niños como a adultos y es uno de los postres que los ves y poco después desaparece.",
+            "price": "2",
+            "image": "images/imagenes_de_pasteles/tarta-san-marcos.jpg"
+        },
+        {
+            "id": 9,
+            "productName": "Bizcocho de Chocolate",
+            "description": "Uno de los Bizcochos preferido de todos y todas, con una textura muy esponjosa y suave. Usamos chocolate puro 100% para garantizar el mejor sabor del mercado.",
+            "price": "1.5",
+            "image": "images/imagenes_de_pasteles/bizcocho-chocolate.jpg"
+        },
+        {
+            "id": 10,
+            "productName": "Pan sin glutén",
+            "description": "El pan de toda la vida, pero sin glutén y manteniedo el sabor del pan artesano de toda la vida. Pan ideal para celíacos debido a que no lleva glutén.",
+            "price": "1.5",
+            "image": "images/imagenes_de_pan/pan_sin_gluten.jpg"
+        },
+        {
+            "id": 11,
+            "productName": "Barra de Pan Rústico",
+            "description": "Pan cocinado a fuego lento usando masa madre para obtener el mejor sabor para nuestros panes. Este pan se puede comer hasta el día siguiente a su compra manteniendo la misma frescura.",
+            "price": "1.5",
+            "image": "images/imagenes_de_pan/barra_rustica.png"
+        }
+    ]
+}

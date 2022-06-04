@@ -1,0 +1,727 @@
+/* Opción desde CDN
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+*/
+
+@font-face {
+    font-display: swap;
+    font-family: "Roboto";
+    src: url("/fuentes/Roboto-Regular.ttf");
+    font-weight: 300;
+}
+
+* {
+    box-sizing: border-box;
+   font-family: "Roboto", sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-size: 1rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* Header styles */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-color: black;
+    border-style: solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-width: 2px;
+    max-height: 70px;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
+}
+
+.li_header {
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+}
+
+.logo {
+    cursor: pointer;
+    margin-left: 5px;
+    width: 80px;
+    height: 80px;
+}
+
+.nav_links .li_header {
+    display: inline-block;
+    padding: 0px 20px;
+    color: black;
+    text-decoration: none;
+}
+
+.nav_links .li_header a {
+    color: black;
+    text-decoration: none;
+}
+
+#hambButton {
+    display: none;
+    cursor: pointer;
+    margin-left: 30px;
+    font-size: 22px;
+}
+
+@media (max-width: 830px) {
+    #hambButton {
+        display: initial;
+    }
+
+    .nav_links {
+        display: none;
+    }
+}
+
+.hambMenu {
+    position: fixed;
+    top: -350px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 80;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.displayHambMenu {
+    top: 70px;
+}
+
+.itemMenu {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+.itemMenu:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.itemMenu:active {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#item-final-menu {
+border-bottom: black solid 1px;
+}
+
+.btn_login {
+    margin-right: 30px;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+}
+
+.texto_index {
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 70px;
+    text-align: justify;
+}
+
+.p_index {
+margin-top: 10px;
+margin-bottom: 10px;
+margin-left: 30px;
+text-align: justify;
+}
+
+button {
+    padding: 8px 15px;
+    margin-right: 15px;
+    background-color: #F0F0B9;
+    border-color: black;
+    border-style: solid;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e8e861;
+}
+
+.pag_actual {
+    font-weight: bold;
+}
+
+/* Slider styles*/
+
+.slider {
+    width: 75%;
+	margin: auto;
+    overflow: hidden;
+    margin-top: 70px;
+    padding-top: 20px;
+}
+
+.slider .ul_slider {
+	display: flex;
+	padding: 0;
+	width: 300%;
+	animation: cambio 30s infinite alternate linear;
+}
+
+.slider .li_slider {
+	width: 100%;
+	list-style: none;
+}
+
+.slider .img_slider {
+	width: 100%;
+}
+
+.img_slider {
+    border-radius: 50px;
+    border-color: gold;
+    border-style: solid;
+}
+
+@keyframes cambio {
+	0% {margin-left: 0;}
+	30% {margin-left: 0;}
+
+	35% {margin-left: -100%;}
+	55% {margin-left: -100%;}
+
+	60% {margin-left: -200%;}
+	100% {margin-left: -200%;}
+}
+
+/*Pagina panaderia*/
+
+.banner_bread {
+    display: flex;
+    align-self: center;
+    border-radius: 50px;
+    margin-top: 90px;
+    max-width: 95%;
+}
+
+.img_ad_banner {
+    border-radius: 10px;
+    border-color: gold;
+    border-style: solid;
+    align-self: center;
+    margin-right: 5%;
+    margin-left: 5%;
+    max-width: 90%;
+}
+
+.img_ad_banner:hover {
+    border-color: goldenrod;
+}
+
+.productsContainer {
+    display: flex;
+    flex-direction:row;
+	flex-wrap:wrap;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 50px;
+    z-index: 30;
+}
+
+.productContainer {
+    margin: 30px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.0);
+}
+
+.productContainer:hover {
+    box-shadow: 3px 3px 5px grey;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    transform: scale(1.03);
+    transition: 0.2s;
+}
+
+.productPicture {
+    border-radius: 10px;
+    border-color: gold;
+    border-style: solid;
+    max-width: 400px;
+    max-height: 400px;
+
+}
+
+.productPageContainer {
+    margin-top: 70px;
+    padding-top: 20px;
+}
+
+.imagen_1 {
+position: 1;
+align-items: center;
+margin-top: 20px;
+margin-left: 7%;
+margin-right: 5%;
+}
+
+.imagen_2 {
+position: 2;
+align-items: center;
+margin-top: 20px;
+margin-left: 5%;
+margin-right: 7%;
+}
+
+.productText {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    cursor: pointer;
+
+}
+
+@media (max-width: 740px){
+    .img_ad_banner .img_ad_banner_pastry {
+        max-width: 90%;
+
+    }
+}
+
+@media (max-width: 430px){
+    body {
+        resize: none;
+        max-width: 95%;
+    }
+
+}
+
+/*Pagina pasteleria*/
+
+.banner_pastry {
+    display: flex;
+    align-self: center;
+    border-radius: 50px;
+    margin-top: 90px;
+    max-width: 95%;
+}
+
+
+.img_ad_banner_pastry {
+    border-radius: 10px;
+    border-color: gold;
+    border-style: solid;
+    align-self: center;
+    margin-right: 5%;
+    margin-left: 5%;
+    max-width: 90%;
+}
+
+.img_ad_banner_pastry:hover {
+    border-color: goldenrod;
+}
+
+.imagenes_pasteles {
+    display: flex;
+    flex-direction:row;
+	flex-wrap:wrap;
+    justify-content: center;
+}
+
+.img_pasteleria {
+border-radius: 50px;
+border-color: gold;
+border-style: solid;
+max-width: 400px;
+max-height: 400px;
+
+}
+
+.imagen_1_pasteles {
+position: 1;
+align-items: center;
+margin-top: 20px;
+margin-left: 7%;
+margin-right: 5%;
+}
+
+.imagen_2_pasteles {
+position: 2;
+align-items: center;
+margin-top: 20px;
+margin-left: 5%;
+margin-right: 7%;
+}
+
+.texto_productos_pasteleria {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.p_producto_name {
+    font-style: oblique;
+    font-size: 1.5em;
+    margin-bottom: 35px;
+    margin-left: 15px;
+}
+
+@media (max-width: 430px){
+    body {
+        resize: none;
+    }
+
+}
+
+/* Contact Webpage Styles */
+
+#leafletMap {
+    width: 60vh;
+    height: 60vh;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left: 1vh;
+}
+
+.icono_contacto {
+    width: 1.5em;
+    height: 1em;
+    align-items: flex-start;
+}
+
+
+.flex-container-contact {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 40px;
+    height: calc(60vh - 100px);
+}
+
+.flex-container-contact .column {
+    padding: 10px;
+}
+
+.ul_contact {
+    margin-top: 40px;
+    text-align: justify;
+}
+
+.li_contact {
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    list-style:none;
+    margin-bottom: 8px;
+}
+
+.horarios {
+ margin-top: 9px;
+ margin-left: 25px;
+}
+
+@media (max-width: 760px){
+ .flex-container-contact {
+   flex-direction: column;
+ }
+ .ul_contact {
+     align-self: center;
+ }
+
+ #leafletMap {
+     margin-bottom: 90px;
+     margin-left: 1vh;
+ }
+}
+
+/* Login Page*/
+
+.formContainer {
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+
+.form {
+    border: 1px solid gold;
+    border-radius: 50px;
+    background-color: #e7d9b28f;
+    margin: auto;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+    border: 1px solid rgb(128, 0, 0);
+  }
+
+  .tab-content {
+      margin-bottom: 1px;
+  }
+
+#login-label {
+    display: inline-block;
+    width: 80px;
+    margin-left: 10%;
+    margin-right: 10px;
+}
+
+.form-group {
+    margin-top: 9px;
+}
+
+#btn_register {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#btn_login {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+input {
+    margin-left: 10px;
+}
+
+#login {
+    margin-top: 50px;
+}
+
+#signup button {
+    margin-top: 20px;
+}
+
+#login button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.titulo_login {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.forgot {
+    margin-top: 20px;
+    text-align: center;
+
+}
+
+.forgot:hover {
+    color: blue;
+}
+
+@media (max-width: 740px){
+    .form {
+        max-width: 100vh;
+    }
+}
+
+@media (max-width: 584px){
+    .form {
+        max-width: 80vh;
+
+    }
+}
+
+@media (max-width: 430px){
+    body {
+        resize: none;
+    }
+
+}
+
+
+/* Producto Page Styles */
+
+.producto {
+    border-radius: 30px;
+    border-style: solid;
+    border-color: gold;
+    margin: 10px 10px 40px 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+    justify-content: space-between;
+}
+
+.productos_relacionados {
+    border-radius: 30px;
+    border-style: solid;
+    border-color: gold;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.img_rel_producto {
+    max-width: 100px;
+    max-height: 100px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-color: goldenrod;
+}
+
+.img_producto {
+    max-width: 300px;
+    max-height: 300px;
+    margin: 10px 10px 10px 25px;
+    border-style: outset;
+    border-color: gold;
+}
+
+.btn_comprar {
+    border-style: groove;
+    border-radius: unset;
+    margin-top: 20px;
+}
+
+.p_producto {
+    margin: 10px 0px 10px 20px ;
+}
+
+.div_producto_info {
+position: relative;
+}
+
+.div_precio {
+    margin-right: 40px;
+    margin-left: 20px;
+    position: relative;
+}
+
+.precio_producto {
+    font-weight: bold;
+}
+
+.h2_producto {
+    margin-left: 10px;
+}
+
+
+@media screen and (max-width:700px) {
+
+    .producto {
+      flex-direction: column;
+      margin-top: 100px;
+    }
+
+    .img_producto {
+        margin-top: 20px;
+    }
+    .div_precio {
+        margin-bottom: 25px;
+    }
+
+  }
+/* Cookies / Privacy /... Page Syles */
+
+.texto_politica {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 70px;
+    padding-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.titulo_politicas {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.p_politica  {
+    text-align: justify;
+    margin-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.lista {
+    text-align: justify;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: 40px;
+}
+
+/* Footer styles */
+
+footer {
+    width: 100%;
+    background: #111;
+    margin-top: auto;
+    color: white;
+    max-height: 100px;
+    position: relative;
+    bottom: 0px;
+    height: 50px;
+    z-index: 50;
+}
+
+.footer_links {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+    margin-bottom: 0;
+}
+
+.footer_links .li_footer {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0.25rem 0.75rem;
+}
+
+.footer_links .a_footer {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer_links .a_footer:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width:700px) {
+
+    footer {
+        height: auto;
+    }
+    .footer_links {
+      flex-direction: column;
+    }
+
+  }

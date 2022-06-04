@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuracion>
+
+    <server>
+        <dbname>pasteleria</dbname>
+        <ip>localhost</ip>
+    </server>
+    
+    <usuario>
+        <nombre>estandar</nombre>
+        <password>1234</password>
+        <rol>2</rol>
+    </usuario>
+    
+    <usuario>
+        <nombre>admin</nombre>
+        <password>1234</password>
+        <rol>1</rol>
+    </usuario>
+
+    <usuario>
+        <nombre>conexion</nombre>
+        <password>1234</password>
+        <rol>3</rol>
+    </usuario>
+    
+</configuracion>
