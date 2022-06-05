@@ -25,24 +25,10 @@ if (!array_key_exists('updates', $_GET)) {
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0" />
-        <title>Inicio</title>
-        <!-- Estilos página-->
-        <link rel="stylesheet" href="css/pagina_panaderia.css">
-        <link rel="stylesheet" href="css/panaderia_v2.css">
-        <!-- Sweetalert2 -->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- CSS Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous" />
-        <!-- Iconos Font Awesome--->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <?php
+    require_once 'head.php';
+    ?>
 
-
-    </head>
     <body style="background-color: whitesmoke">
         <div class="container-flex">
             <?php
@@ -94,8 +80,8 @@ if (!array_key_exists('updates', $_GET)) {
                                         <th scope="col">Anterior imagen</th>
                                         <th scope="col">Anterior password</th>
                                         <th scope="col">Anterior fecha de registro</th>
-                                      
-                                  
+
+
                                         <th scope="col">Nuevo nombre</th>
                                         <th scope="col">Nuevo apellido</th>
                                         <th scope="col">Nuevo email</th>
@@ -115,9 +101,7 @@ if (!array_key_exists('updates', $_GET)) {
 
                                     <?php
                                     $usuarios = $db->getUpdatesUsers($start, $usersByPage);
-                                    
-                                
-                                   
+
                                     foreach ($usuarios as $v) {
 
                                         echo '<tr>'
@@ -133,7 +117,6 @@ if (!array_key_exists('updates', $_GET)) {
                                         . '<td>' . $v[9] . '</td>'
                                         . '<td>' . $v[10] . '</td>'
                                         . '<td>' . $v[11] . '</td>'
-                                                                     
                                         . '<td style="color:blue">' . $v[12] . '</td>'
                                         . '<td style="color:blue">' . $v[13] . '</td>'
                                         . '<td style="color:blue">' . $v[14] . '</td>'
@@ -146,8 +129,6 @@ if (!array_key_exists('updates', $_GET)) {
                                         . '<td style="color:blue">' . $v[21] . '</td>'
                                         . '<td style="color:blue">' . $v[22] . '</td>'
                                         . '<td style="color:blue">' . $v[23] . '</td>'
-                                       
-                                       
                                         . '</tr>';
                                     }
                                     ?>
@@ -161,7 +142,7 @@ if (!array_key_exists('updates', $_GET)) {
                                     </li>
 
 
-                                    <?php for ($i = 0; $i < $totalPages; $i++): ?>
+<?php for ($i = 0; $i < $totalPages; $i++): ?>
 
                                         <li class="page-item  <?php echo $_GET['updates'] == $i + 1 ? 'active' : '' ?>">
                                             <a  class="page-link" href="usersUpdates.php?updates=<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
@@ -189,9 +170,9 @@ if (!array_key_exists('updates', $_GET)) {
 
 
 
-        <?php
-        require_once 'footer.php';
-        ?>
+<?php
+require_once 'footer.php';
+?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <script src="js/responsive_header.js"></script>

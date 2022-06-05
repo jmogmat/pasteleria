@@ -139,7 +139,7 @@ class functions {
 
             if ($typeProduct == '1') {
 
-                $res = move_uploaded_file($_FILES['img']['tmp_name'], __DIR__ . '/../../images/imagenes_de_pan/' . $_FILES['img']['name']);
+                $res = move_uploaded_file($_FILES['img']['tmp_name'], __DIR__ . '/../../images/imagenes_de_pasteles/' . $_FILES['img']['name']);
                 if (!$res) {
                     throw new RuntimeException('La imagen no pudo ser cambiada de directorio.');
                 } else {

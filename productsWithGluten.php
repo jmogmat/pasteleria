@@ -29,33 +29,40 @@ $sesion->checkSession();
 
                 $db = new conect($_SESSION['rol']);
 
-                $productsPastry = $db->getAllProductsPastry();
+                $productsWithGluten = $db->getAllProductsWithGluten();
 
-                $imgProductsPastry = $db->getImgfromProductsPastry(); 
+                $imgProductsWithGluten = $db->getImgfromProductsWihGluten(); 
 
-                foreach ($productsPastry as $v) {
+                foreach ($productsWithGluten as $v) {
 
-                    foreach ($imgProductsPastry as $i) {
+                    foreach ($imgProductsWithGluten as $i) {
 
                         if ($i['id'] == $v['id']) {
 
                             $nameImg = pathinfo($i['ruta'], PATHINFO_BASENAME);
-                            $image = 'images/imagenes_de_pasteles/'. $nameImg;
+
+                            if ($v['tipo_producto'] == '1') {
+                                
+                                $image = 'images/imagenes_de_pasteles/' . $nameImg;
+                            } 
+                            if($v['tipo_producto'] == '2'){
+                                 $image = 'images/imagenes_de_pan/' . $nameImg;
+                            }
                             ?>
-                             <div class="col-auto shadow rounded p-1" style="margin-top: 4%;">
+                            <div class="col-auto shadow rounded p-1" style="margin-top: 4%;">
                                 <form>
                                     <div class="" style="text-align: center">
                                         <div style="width: 30rem;">
-                                            
-                                                <div class="">
-                                                    <span class="image mr-half inline-block" style="text-align: center">
-                                                        <div><object type="image/svg+xml" data="<?php $image; ?>" >
-                                                                <img id="imagen" src="<?php echo $image; ?>" style="width: 400px; height: 300px"></img>
-                                                            </object>
-                                                        </div>
-                                                    </span>
-                                                </div>
-                                        
+
+                                            <div class="">
+                                                <span class="image mr-half inline-block" style="text-align: center">
+                                                    <div><object type="image/svg+xml" data="<?php $image; ?>" >
+                                                            <img id="imagen" src="<?php echo $image; ?>" style="width: 400px; height: 300px"></img>
+                                                        </object>
+                                                    </div>
+                                                </span>
+                                            </div>
+
                                             <div class="card-body">
                                                 <fieldset class="border p-2 rounded"">
                                                     <h5><?php echo $v['nombre']; ?></h5>
@@ -68,17 +75,18 @@ $sesion->checkSession();
                                     </div>
                                 </form>
                             </div>
-            <?php
-        }
-    }
-}
-?>
+                            <?php
+                        }
+                    }
+                }
+                ?>
+
 
             </div>
         </div>
-<?php
-require_once 'footer.php';
-?>
+        <?php
+        require_once 'footer.php';
+        ?>
 
         <!-- JavaScript Bundle with Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js"

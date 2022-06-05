@@ -36,24 +36,11 @@ $start = ($_GET['page'] - 1) * $productsByPage;
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0" />
-        <title>Inicio</title>
-        <!-- Estilos página-->
-        <link rel="stylesheet" href="css/pagina_panaderia.css">
-        <link rel="stylesheet" href="css/panaderia_v2.css">
-        <!-- Sweetalert2 -->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- CSS Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous" />
-        <!-- Iconos Font Awesome--->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <?php
+    require_once 'head.php';
+    ?>
 
 
-    </head>
     <body style="background-color: rgb(246,246,246)">
 
         <div class="container-flex">
@@ -66,7 +53,7 @@ $start = ($_GET['page'] - 1) * $productsByPage;
             ?>
         </div>
 
-       
+
         <?php
         require_once 'navAdminPanel.php';
         ?>
@@ -258,12 +245,12 @@ $start = ($_GET['page'] - 1) * $productsByPage;
                             </li>
 
 
-<?php for ($i = 0; $i < $totalPages; $i++): ?>
+                            <?php for ($i = 0; $i < $totalPages; $i++): ?>
 
                                 <li class="page-item  <?php echo $_GET['page'] == $i + 1 ? 'active' : '' ?>">
                                     <a  class="page-link" href="userAdminPage.php?page=<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
 
-<?php endfor; ?>
+                            <?php endfor; ?>
 
 
 
@@ -309,9 +296,9 @@ $start = ($_GET['page'] - 1) * $productsByPage;
         </div>
 
 
-<?php
-require_once 'footer.php';
-?>
+        <?php
+        require_once 'footer.php';
+        ?>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

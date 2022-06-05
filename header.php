@@ -1,16 +1,39 @@
 
 <header>
-    <i class="fa fa-bars" aria-hidden="true" id="hambButton"></i>
-    <a href="index.php"><img class="logo" src="images/logo.svg" alt="logo" /></a>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a href="index.php"><img class="logo" src="images/logo.svg" alt="logo" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <ul class="nav_links px-2 mt-3">
-        <li class="li_header"><a href="index.php" class="pag_actual">Inicio</a></li>
-        <li class="li_header"><a href="panaderia.php">Panadería</a></li>
-        <li class="li_header"><a href="pasteleria.php">Pastelería</a></li>
-        <li class="li_header"><a href="blog.php">Blog</a></li>
-        <li class="li_header"><a href="contacto.php">Contacto</a></li>
-    </ul>
-    <ul class="nav_links px-2 mt-3">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php">Inicio<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="panaderia.php">Panadería</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pasteleria.php">Pastelería</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categorías
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="productsWithoutGluten.php">Productos sin gluten</a>
+                        <a class="dropdown-item" href="productsWithGluten.php">Productos con gluten</a>                     
+                    </div>                   
+                </li>  
+                <li class="nav-item"><a class="nav-link" href="blog.php" class="pag_actual">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="contacto.php" class="pag_actual">Contacto</a></li>
+            </ul>
+            <a class="nav-link" style="color: gray; cursor:pointer; font-size: 22px;"><i class="fas fa-shopping-cart"></i>
+        </div>
+    </nav>
+
+    <ul class="navbar-nav" style="margin-right: 1%">
         <li class="li_header">
             <?php
             $page = "";
@@ -49,38 +72,36 @@
                 }
                 ?>
 
-                <div class="btn-group">
-                    <div class="btn btn-primary"><?php echo $us . " " . $usuario; ?></div>
-                    <div type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Desplegar menú</span>
-                    </div>
-                    <ul class="dropdown-menu" role="menu" style="background-color: rgb(246,246,246); border: 1px solid rgb(246,246,246)">
-                        <?php
-                        if ($rol == '1') {
-                            ?>
-                            <li><a href="userAdminPage.php">Panel de administrador</a></li>
-                            <li><a href="logout.php" name="logout">Cerrar sesion</a></li>
-
-                            <?php
-                        } else if ($rol == '2') {
-                            ?>
-                            <li><a href="userStandarPage.php">Escritorio</a></li>
-                            <li><a href="logout.php" name="logout">Cerrar sesion</a></li>   
-                            <?php
-                        }
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: gray; font-size: 17px">
+                    <?php echo $us . " " . $usuario; ?>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php
+                    if ($rol == '1') {
                         ?>
+                        <a class="dropdown-item" href="userAdminPage.php">Panel de administrador</a>
+                        <a class="dropdown-item" href="logout.php" name="logout">Cerrar sesion</a>
 
-                    </ul>
+                        <?php
+                    } else if ($rol == '2') {
+                        ?>
+                        <a class="dropdown-item" href="userStandarPage.php">Escritorio</a>
+                        <a class="dropdown-item" href="logout.php" name="logout">Cerrar sesion</a>  
+                        <?php
+                    }
+                    ?>  
                 </div>
-                </a>
-            <?php } else { ?>
-                <a class="btn_login" href="login.php">
-                    <i class="fa fa-user-circle" aria-hidden="true">
-                    </i>
-                </a>
-            <?php } ?>
-        </li>  
-    </ul>
+            </li>  
+        </ul>
+
+    <?php } else { ?>
+
+        <a class="btn_login" href="login.php"  style="color: gray; cursor:pointer; font-size: 32px">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+        </a>
+    <?php } ?>
+</li>  
+</ul>
 </header>
 

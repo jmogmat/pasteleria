@@ -1009,6 +1009,189 @@ class conectDB {
         }
     }
 
+    function getAllProductsPastry() {
+
+        $sql = 'select * from Productos where tipo_producto = 1';
+
+        $db = $this->pdo;
+
+        $array = array();
+
+        try {
+
+            $smtp = $db->query($sql);
+
+            while ($row = $smtp->fetch()) {
+
+                array_push($array, $row);
+            }
+
+            return $array;
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function getAllProductsBakery() {
+
+        $sql = 'select * from Productos where tipo_producto = 2';
+
+        $db = $this->pdo;
+
+        $array = array();
+
+        try {
+
+            $smtp = $db->query($sql);
+
+            while ($row = $smtp->fetch()) {
+
+                array_push($array, $row);
+            }
+
+            return $array;
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function getImgfromProductsBakery() {
+
+        $sql = 'select i.ruta, p.id from Productos as p inner join productos_imagenes as pi on pi.id_producto = p.id left join imagenes as i on i.id = pi.id_imagen where p.tipo_producto = 2 order by p.id';
+
+        $db = $this->pdo;
+
+        $array = array();
+
+        try {
+
+            $smtp = $db->query($sql);
+
+            while ($row = $smtp->fetch()) {
+
+                array_push($array, $row);
+            }
+
+            return $array;
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function getImgfromProductsPastry() {
+
+        $sql = 'select i.ruta, p.id from Productos as p inner join productos_imagenes as pi on pi.id_producto = p.id left join imagenes as i on i.id = pi.id_imagen where p.tipo_producto = 1 order by p.id';
+
+        $db = $this->pdo;
+
+        $array = array();
+
+        try {
+
+            $smtp = $db->query($sql);
+
+            while ($row = $smtp->fetch()) {
+
+                array_push($array, $row);
+            }
+
+            return $array;
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function getAllProductsWihtoutGluten() {
+        $sql = 'select * from productos as p inner join categorias_productos as cp on p.id = cp.id_producto where cp.id_categoria = 1 ';
+
+        $db = $this->pdo;
+
+        $array = array();
+
+        try {
+
+            $smtp = $db->query($sql);
+
+            while ($row = $smtp->fetch()) {
+
+                array_push($array, $row);
+            }
+
+            return $array;
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function getAllProductsWithGluten() {
+
+        $sql = 'select * from productos as p inner join categorias_productos as cp on p.id = cp.id_producto where cp.id_categoria = 2 ';
+
+        $db = $this->pdo;
+
+        $array = array();
+
+        try {
+
+            $smtp = $db->query($sql);
+
+            while ($row = $smtp->fetch()) {
+
+                array_push($array, $row);
+            }
+
+            return $array;
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function getImgfromProductsWihoutGluten() {
+
+        $sql = 'select p.id, i.ruta from productos as p inner join categorias_productos as cp on p.id = cp.id_producto inner join productos_imagenes as pi on p.id = pi.id_producto inner join imagenes as i on i.id = pi.id_imagen where cp.id_categoria = 1';
+
+        $db = $this->pdo;
+
+        $array = array();
+
+        try {
+
+            $smtp = $db->query($sql);
+
+            while ($row = $smtp->fetch()) {
+
+                array_push($array, $row);
+            }
+
+            return $array;
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function getImgfromProductsWihGluten() {
+
+        $sql = 'select p.id, i.ruta from productos as p inner join categorias_productos as cp on p.id = cp.id_producto inner join productos_imagenes as pi on p.id = pi.id_producto inner join imagenes as i on i.id = pi.id_imagen where cp.id_categoria = 2';
+
+        $db = $this->pdo;
+
+        $array = array();
+
+        try {
+
+            $smtp = $db->query($sql);
+
+            while ($row = $smtp->fetch()) {
+
+                array_push($array, $row);
+            }
+
+            return $array;
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
 }
 
 ?>
