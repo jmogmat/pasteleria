@@ -6,6 +6,8 @@ use \functions\functions as func;
 $sesion = new func();
 
 $sesion->checkSession();
+
+
 ?>
 
 <!DOCTYPE html>

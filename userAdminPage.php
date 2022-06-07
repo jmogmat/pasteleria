@@ -196,7 +196,7 @@ $start = ($_GET['page'] - 1) * $productsByPage;
                     <h2 style="margin-top: 70px; text-align: center">Lista de productos</h2>
                     <div id="busqueda_producto">
                         <form class="form-group my-3 my-lg-0">
-                            <input class="form-group p-2" type="search" placeholder="Código del producto" aria-label="Search" id="id_a_buscar">
+                            <input class="form-group p-2 col-2" type="search" placeholder="Código del producto o nombre" aria-label="Search" id="buscar">
                             <button class="btn btn-outline-success p-2" type="button" name="boton_buscar_producto" id="boton_buscar_producto" onclick="searchProduct()" style="margin-left: 1%">Buscar</button>
                             <button class="btn btn-outline-success p-2" type="button" name="ver_lista_productos" id="ver_lista_productos" onclick="showListProducts()" style="margin-left: 1%; display: none">Volver al listado</button>
                         </form>
@@ -312,16 +312,16 @@ $start = ($_GET['page'] - 1) * $productsByPage;
 
                                 function searchProduct() {
 
-                                    var id = document.getElementById('id_a_buscar').value;
+                                    var dato = document.getElementById('buscar').value;
 
-                                    var cadId = String(id);
+                                    var product = String(dato);
 
 
                                     return $.ajax({
-                                        url: 'api/searchProductById.php',
+                                        url: 'api/searchProduct.php',
                                         type: 'POST',
                                         data: {
-                                            idProducto: cadId
+                                           producto: product
 
                                         },
                                         datatype: 'JSON',

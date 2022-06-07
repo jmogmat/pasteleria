@@ -17,12 +17,12 @@ $arrayCampos = ['codigoTipoProducto', 'nombre_producto', 'descripcion', 'precio'
 
 if ($tool->checkFieldsForm($arrayCampos)) {
 
-    $codeTypeProduct = $_POST['codigoTipoProducto'];
-    $nameProduct = $_POST['nombre_producto'];
-    $description = $_POST['descripcion'];
-    $price = $_POST['precio'];
-    $amount = $_POST['cantidad'];
-    $categorie = $_POST['categoria'];
+    $codeTypeProduct = trim($_POST['codigoTipoProducto']);
+    $nameProduct = trim($_POST['nombre_producto']);
+    $description = trim($_POST['descripcion']);
+    $price = trim($_POST['precio']);
+    $amount = trim($_POST['cantidad']);
+    $categorie = trim($_POST['categoria']);
 
     $db = new conect($_SESSION['rol']);
 

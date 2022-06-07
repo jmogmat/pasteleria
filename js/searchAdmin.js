@@ -1,15 +1,16 @@
 
 function searchAdmin() {
    
-
-    var id = document.getElementById('id_admin').value;
+   
 
    
+    var ad = document.getElementById('admin').value;
+   
     return $.ajax({
-        url: 'api/searchAdminById.php',
+        url: 'api/searchAdmin.php',
         type: 'POST',
         data: {
-            idAdmin: id
+            administrador: ad
 
         },
         datatype: 'JSON',
@@ -28,7 +29,6 @@ function searchAdmin() {
 
                     } else {
                         
-                        console.log(admin)
 
                         document.getElementById('tabla_admin').style.display = "none";
                     

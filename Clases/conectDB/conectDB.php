@@ -619,25 +619,49 @@ class conectDB {
         }
     }
 
-    function adminSearchProductById($idProduct) {
-
-        $sql = 'select p.id, p.nombre, p.descripcion, p.precio, p.cantidad, p.tipo_producto, c.nombre_categoria from Productos as p inner join Categorias_productos as cp on cp.id_producto = p.id inner join Categorias as c on c.id = cp.id_categoria where p.id = ?;';
-
-        $db = $this->pdo;
+    function adminSearchProduct($dato) {
 
         $dataProduct = array();
 
+        $sql = 'select p.id, p.nombre, p.descripcion, p.precio, p.cantidad, p.tipo_producto, c.nombre_categoria from Productos as p '
+                . 'inner join Categorias_productos as cp on cp.id_producto = p.id inner join Categorias as c on c.id = cp.id_categoria'
+                . ' where p.id = ?;';
+
+        $sql2 = 'select p.id, p.nombre, p.descripcion, p.precio, p.cantidad, p.tipo_producto, c.nombre_categoria from Productos as p '
+                . 'inner join Categorias_productos as cp on cp.id_producto = p.id inner join Categorias as c on c.id = cp.id_categoria'
+                . ' where p.nombre like ?;';
+
+        $db = $this->pdo;
+
         try {
 
-            if ($smtp = $db->prepare($sql)) {
+            if (is_numeric($dato)) {
 
-                $smtp->bindValue(1, $idProduct);
-                $smtp->execute();
-                while ($result = $smtp->fetch()) {
-                    array_push($dataProduct, $result);
+                if ($smtp = $db->prepare($sql)) {
+
+                    $smtp->bindValue(1, $dato);
+                    $smtp->execute();
+                    while ($result = $smtp->fetch()) {
+                        array_push($dataProduct, $result);
+                    }
+
+                    return $dataProduct;
+                }
+            } else {
+
+                if ($smtp = $db->prepare($sql2)) {
+
+                    $param = array("$dato%");
+
+                    $smtp->execute($param);
+
+                    while ($result = $smtp->fetch()) {
+                        array_push($dataProduct, $result);
+                    }
+
+                    return $dataProduct;
                 }
             }
-            return $dataProduct;
         } catch (\Exception $ex) {
             echo $ex->getMessage();
         }
@@ -849,27 +873,204 @@ class conectDB {
         }
     }
 
-    function searchAdminById($id) {
+    function searchAdmin($admin) {
 
         $array = array();
 
         $sql = 'select id, nombre, email from Usuarios where id = ?;';
+        $sql2 = 'select id, nombre, email from Usuarios where email like ?;';
 
         $db = $this->pdo;
 
         try {
 
-            if ($smtp = $db->prepare($sql)) {
+            if (is_numeric($admin)) {
 
-                $smtp->bindValue(1, $id);
-                $smtp->execute();
+                if ($smtp = $db->prepare($sql)) {
 
-                while ($row = $smtp->fetch()) {
+                    $smtp->bindValue(1, $admin);
+                    $smtp->execute();
 
-                    array_push($array, $row);
+                    while ($row = $smtp->fetch()) {
+
+                        array_push($array, $row);
+                    }
+                }
+                return $array;
+            } else {
+
+                if ($smtp = $db->prepare($sql2)) {
+
+                    $param = array("$admin%");
+                    $smtp->execute($param);
+
+                    while ($row = $smtp->fetch()) {
+
+                        array_push($array, $row);
+                    }
+
+                    return $array;
                 }
             }
-            return $array;
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function searchUserActive($user) {
+
+        $array = array();
+
+        $sql = 'select id, nombre, apellido, email, telefono, direccion, ciudad, codigo_postal, provincia, imagen, password, rol_usuario, fecha_registro, fecha_ultimo_acceso, estado from Usuarios where estado = 1 and id = ?;';
+        $sql2 = 'select id, nombre, apellido, email, telefono, direccion, ciudad, codigo_postal, provincia, imagen, password, rol_usuario, fecha_registro, fecha_ultimo_acceso, estado from Usuarios where email like ? and estado = 1;';
+
+        $db = $this->pdo;
+
+        try {
+
+            if (is_numeric($user)) {
+
+                if ($smtp = $db->prepare($sql)) {
+
+                    $smtp->bindValue(1, $user, \PDO::PARAM_STR);
+                    $smtp->execute();
+
+                    while ($row = $smtp->fetch()) {
+
+                        array_push($array, $row);
+                    }
+                }
+                return $array;
+            } else {
+
+                if ($smtp = $db->prepare($sql2)) {
+
+                    $param = array("$user%");
+                    $smtp->execute($param);
+
+                    while ($row = $smtp->fetch()) {
+
+                        array_push($array, $row);
+                    }
+
+                    return $array;
+                }
+            }
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function searchUserDeleted($user) {
+
+        $array = array();
+
+        $sql = 'select id, nombre, apellido, email, telefono, direccion, ciudad, codigo_postal, provincia, imagen, password, rol_usuario, fecha_registro, fecha_ultimo_acceso, estado from Usuarios where estado = 2 and id = ?;';
+        $sql2 = 'select id, nombre, apellido, email, telefono, direccion, ciudad, codigo_postal, provincia, imagen, password, rol_usuario, fecha_registro, fecha_ultimo_acceso, estado from Usuarios where email like ? and estado = 2;';
+
+        $db = $this->pdo;
+
+        try {
+
+            if (is_numeric($user)) {
+
+                if ($smtp = $db->prepare($sql)) {
+
+                    $smtp->bindValue(1, $user, \PDO::PARAM_STR);
+                    $smtp->execute();
+
+                    while ($row = $smtp->fetch()) {
+
+                        array_push($array, $row);
+                    }
+                }
+                return $array;
+            } else {
+
+                if ($smtp = $db->prepare($sql2)) {
+
+                    $param = array("$user%");
+                    $smtp->execute($param);
+
+                    while ($row = $smtp->fetch()) {
+
+                        array_push($array, $row);
+                    }
+
+                    return $array;
+                }
+            }
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function searchUpdateByDate($date1, $date2) {
+
+        $array = array();
+        $db = $this->pdo;
+
+        $sql_1 = 'select * from Usuarios_actualizados where fecha_modificacion between :fecha1 and :fecha2 order by fecha_modificacion desc';
+        $sql_2 = 'select * from Usuarios_actualizados where fecha_modificacion = ?';
+
+        try {
+
+            if ($date1 != "" && $date2 != "") {
+
+                if ($stmt = $db->prepare($sql_1)) {
+                    $stmt->bindParam(':fecha1', $date1);
+                    $stmt->bindValue('fecha2', $date2);
+                    $stmt->execute();
+
+                    while ($row = $stmt->fetch()) {
+
+                        array_push($array, $row);
+                    }
+                    return $array;
+                }
+            }
+
+            if ($date1 != "" && $date2 == "") {
+
+                if ($smtp = $db->prepare($sql_2)) {
+                    $smtp->bindValue(1, $date1, \PDO::PARAM_STR);
+                    $smtp->execute();
+
+                    while ($row = $smtp->fetch()) {
+
+                        array_push($array, $row);
+                    }
+                    return $array;
+                }
+            }
+
+            if ($date2 != "" && $date1 == "") {
+
+                if ($smtp = $db->prepare($sql_2)) {
+                    $smtp->bindValue(1, $date2, \PDO::PARAM_STR);
+                    $smtp->execute();
+
+                    while ($row = $smtp->fetch()) {
+
+                        array_push($array, $row);
+                    }
+                    return $array;
+                }
+            }
+
+            if ($date2 === $date1) {
+
+                if ($smtp = $db->prepare($sql_2)) {
+                    $smtp->bindValue(1, $date2, \PDO::PARAM_STR);
+                    $smtp->execute();
+
+                    while ($row = $smtp->fetch()) {
+
+                        array_push($array, $row);
+                    }
+                    return $array;
+                }
+            }
         } catch (\Exception $ex) {
             echo $ex->getMessage();
         }
@@ -894,7 +1095,7 @@ class conectDB {
     function getAllUsersActives($start, $offset) {
 
         $db = $this->pdo;
-        $sql = 'select id, nombre, apellido, email, telefono, direccion, ciudad, codigo_postal, provincia, rol_usuario, fecha_registro, fecha_ultimo_acceso, estado from Usuarios where estado = 1 order by id asc LIMIT :start,:ofset';
+        $sql = 'select id, nombre, apellido, email, telefono, direccion, ciudad, codigo_postal, provincia, imagen, password, rol_usuario, fecha_registro, fecha_ultimo_acceso, estado from Usuarios where estado = 1 order by id asc LIMIT :start,:ofset';
         try {
 
             $result = $db->prepare($sql);

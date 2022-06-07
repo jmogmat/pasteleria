@@ -1,4 +1,57 @@
+<?php
+require_once 'modalCart.php';
+?>
+<?php
 
+if (isset($_SESSION['carrito'])) {
+
+    $MyCart = $_SESSION['carrito'];
+
+// $_SESSION['carrito']=$MyCart;
+}
+
+// contamos nuestro carrito
+if (isset($_SESSION['carrito'])) {
+
+    for ($i = 0; $i <= count($MyCart) - 1; $i++) {
+
+        if (isset($MyCart[$i])) {
+
+            if ($MyCart[$i] != NULL) {
+
+                if (!isset($MyCart['cantidad'])) {
+
+                    $MyCart['cantidad'] = '0';
+                } else {
+
+                    $MyCart['cantidad'] = $MyCart['cantidad'];
+                }
+
+                $total_cantidad = $MyCart['cantidad'];
+
+                $total_cantidad++;
+
+                if (!isset($totalcantidad)) {
+
+                    $totalcantidad = '0';
+                    
+                } else {
+
+                    $totalcantidad = $totalcantidad;
+                }
+                $totalcantidad += $total_cantidad;
+            }
+        }
+    }
+}
+
+//declaramos variables
+if (!isset($totalcantidad)) {
+    $totalcantidad = '';
+} else {
+    $totalcantidad = $totalcantidad;
+}
+?>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
         <a href="index.php"><img class="logo" src="images/logo.svg" alt="logo" /></a>
@@ -18,9 +71,7 @@
                     <a class="nav-link" href="pasteleria.php">Pastelería</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categorías
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>                  
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="productsWithoutGluten.php">Productos sin gluten</a>
                         <a class="dropdown-item" href="productsWithGluten.php">Productos con gluten</a>                     
@@ -29,7 +80,7 @@
                 <li class="nav-item"><a class="nav-link" href="blog.php" class="pag_actual">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="contacto.php" class="pag_actual">Contacto</a></li>
             </ul>
-            <a class="nav-link" style="color: gray; cursor:pointer; font-size: 22px;"><i class="fas fa-shopping-cart"></i>
+            <a class="nav-link" style="color: gray; cursor:pointer; font-size: 22px;"><i class="fas fa-shopping-cart"  data-toggle='modal'  data-target='#modalcart'></i><?php echo $totalcantidad; ?></a>
         </div>
     </nav>
 

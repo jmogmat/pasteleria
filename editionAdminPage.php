@@ -17,25 +17,9 @@ $userData = $db->getUserData($user_id);
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0" />
-        <title>Inicio</title>
-        <!-- Estilos página-->
-        <link rel="stylesheet" href="css/pagina_panaderia.css">
-        <link rel="stylesheet" href="css/panaderia_v2.css">
-        <!-- Sweetalert2 -->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- CSS Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous" />
-        <!-- Iconos Font Awesome--->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-    
-
-    </head>
+    <?php
+    require_once 'head.php';
+    ?>
     <body style="background-color: whitesmoke">
         <div class="container-flex">
             <?php
@@ -93,7 +77,7 @@ $userData = $db->getUserData($user_id);
                     <h2 style="margin-top: 70px; text-align: center">Lista de usuarios administradores</h2>
                     <div id="busqueda_admin" style="margin-top:3%">
                         <form class="form-group my-3 my-lg-0" id="search_admin">
-                            <input class="form-group" type="search" placeholder="Código ID del usuario administrador" aria-label="Search" name="id_admin" id="id_admin" style="padding:0.5%; width: 30%">
+                            <input class="form-group col-4" type="search" placeholder="Código ID del usuario administrador o email" aria-label="Search" name="admin" id="admin" style="padding:0.5%">
                             <button class="btn btn-outline-success" type="button" name="boton_buscar_admin" id="boton_buscar_admin" style="margin-left:2%" onclick="searchAdmin()">Buscar</button>
                         </form>
                     </div>
@@ -148,7 +132,6 @@ $userData = $db->getUserData($user_id);
         ?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-        <script src="js/responsive_header.js"></script>
         <script src="js/addNewAdmin.js"></script>
         <script src="js/removeAdmin.js"></script>
         <script src="js/searchAdmin.js"></script>

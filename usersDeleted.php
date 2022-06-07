@@ -59,9 +59,20 @@ if (!array_key_exists('pagUsersDeleted', $_GET)) {
         $start = ($_GET['pagUsersDeleted'] - 1) * $usersByPage;
         ?>
 
+        <div class="container-flex m-3">
+            <div class="row">
+                <div class="">
+                    <div id="busqueda_admin" class="" style="margin-top:3%">
+                        <form class="form-group my-3 my-lg-0" id="searchUserActive">
+                            <input class="form-group col-2 p-2" type="search" placeholder="Código ID del usuario o email" aria-label="Search" name="userDeleted" id="userDeleted">
+                            <button class="btn btn-outline-success p-2" type="button" name="boton_buscar_admin" id="boton_buscar_admin" style="margin-left:2%" onclick="searchUserDeleted()">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-        <div id="formularios_usuarios" class="col-auto container-fluid">
+        <div id="usersDeleted" class="col-auto container-fluid">
             <div class="row">
                 <form id="form_users_deleted">
                     <fieldset class="border p-2">
@@ -75,14 +86,14 @@ if (!array_key_exists('pagUsersDeleted', $_GET)) {
                                     <tr>
                                         <th scope="col">Código</th>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">Apellidos</th>
+                                        <th scope="col">Apellido</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Telefono</th> 
                                         <th scope="col">Dirección</th> 
                                         <th scope="col">Ciudad</th> 
                                         <th scope="col">Código postal</th> 
                                         <th scope="col">Provincia</th>
-                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Imagen</th> 
                                         <th scope="col">Password</th> 
                                         <th scope="col">Rol</th>
                                         <th scope="col">Fecha de registro</th> 
@@ -145,6 +156,56 @@ if (!array_key_exists('pagUsersDeleted', $_GET)) {
             </div> 
         </div>
 
+        <div id="tableUsersDeleted"  class="col-auto container-fluid" style="margin-top:2%; display: none">
+            <div class="row">
+                <fieldset class="border p-2">
+                    <div class="form-group">
+                        <div class="flex-container" style="display: flex">
+                            <div style="margin-left: 35%"><object type="image/svg+xml" data="images/aprobado.svg" style="width: 25px; height: 30px"><img src="images/aprobado.svg"></img></object></div>
+                            <div style="align-content:center"><h4 style="color: slategrey; margin-left: 10px">Usuarios de alta en el sistema</h4><br><br></div>
+                        </div>
+                        <table class="table table-hover" >
+                            <thead>
+                                <tr>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellidos</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Telefono</th> 
+                                    <th scope="col">Dirección</th> 
+                                    <th scope="col">Ciudad</th> 
+                                    <th scope="col">Código postal</th> 
+                                    <th scope="col">Provincia</th> 
+                                    <th scope="col">Rol</th>
+                                    <th scope="col">Fecha de registro</th> 
+                                    <th scope="col">Último acceso</th> 
+                                    <th scope="col">Status</th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr id="tr_search_user">
+                                    <td id="td_search_user_1"></td>
+                                    <td id="td_search_user_2"></td>
+                                    <td id="td_search_user_3"></td> 
+                                    <td id="td_search_user_4"></td>
+                                    <td id="td_search_user_5"></td>
+                                    <td id="td_search_user_6"></td> 
+                                    <td id="td_search_user_7"></td>
+                                    <td id="td_search_user_8"></td>
+                                    <td id="td_search_user_9"></td> 
+                                    <td id="td_search_user_10"></td>
+                                    <td id="td_search_user_11"></td>
+                                    <td id="td_search_user_12"></td> 
+                                    <td id="td_search_user_13"></td> 
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
 
 
         <?php
@@ -153,6 +214,7 @@ if (!array_key_exists('pagUsersDeleted', $_GET)) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <script src="js/responsive_header.js"></script>
+        <script src="js/searchUserDeleted.js"></script>
 
     </body>
 </html>

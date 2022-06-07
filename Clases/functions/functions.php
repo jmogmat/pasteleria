@@ -53,6 +53,8 @@ class functions {
      * @param string $result
      */
     function saveSessionData($result) {
+
+       
         if (session_status() == PHP_SESSION_NONE) { // Comprobamos si NO tenemos una sessión activo
             session_start();
         }
@@ -63,7 +65,9 @@ class functions {
 
         $_SESSION['usuario'] = json_encode(new usuario($result['id'], $result['nombre'], $result['apellido'], $result['email'], $result['telefono'], $result['direccion'], $result['ciudad'], $result['codigo_postal'], $result['provincia'], "", $result['rol_usuario'], $result['estado']));
         $_SESSION['rol'] = $result['rol_usuario'];
-       // header("location:index.php");
+
+      
+        // header("location:index.php");
     }
 
     function checkSession() {
@@ -135,7 +139,7 @@ class functions {
             if ($ext === false) {
                 throw new RuntimeException('Imagen non reconocida.');
             }
-            
+
 
             if ($typeProduct == '1') {
 
@@ -174,7 +178,6 @@ class functions {
             if (!isset($_POST[$value]) || empty($_POST [$value])) {
                 $ok = false;
             }
-       
         }
 
         return $ok;

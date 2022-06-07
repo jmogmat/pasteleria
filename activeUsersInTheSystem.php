@@ -26,25 +26,9 @@ if (!array_key_exists('pag', $_GET)) {
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0" />
-        <title>Inicio</title>
-        <!-- Estilos página-->
-        <link rel="stylesheet" href="css/pagina_panaderia.css">
-        <link rel="stylesheet" href="css/panaderia_v2.css">
-        <!-- Sweetalert2 -->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- CSS Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous" />
-        <!-- Iconos Font Awesome--->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-
-
-    </head>
+    <?php
+    require_once 'head.php';
+    ?>
     <body style="background-color: whitesmoke">
         <div class="container-flex">
             <?php
@@ -72,14 +56,24 @@ if (!array_key_exists('pag', $_GET)) {
 
         $start = ($_GET['pag'] - 1) * $usersByPage;
         ?>
+        <div class="container-flex m-3">
+            <div class="row">
+                <div class="">
+                    <div id="busqueda_admin" class="" style="margin-top:3%">
+                        <form class="form-group my-3 my-lg-0" id="searchUserActive">
+                            <input class="form-group col-2 p-2" type="search" placeholder="Código ID del usuario o email" aria-label="Search" name="userActive" id="userActive">
+                            <button class="btn btn-outline-success p-2" type="button" name="boton_buscar_admin" id="boton_buscar_admin" style="margin-left:2%" onclick="searchUserActive()">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-
-        <div id="formularios_usuarios" class="col-auto container-fluid">
+        <div id="tabla_usuarios" class="col-auto container-fluid" style="margin-top:2%">
             <div class="row">
 
                 <form id="form_users">
-                    <fieldset class="border p-2">
+                    <fieldset class="border p-2 rounded">
                         <div class="form-group">
                             <div class="flex-container" style="display: flex">
                                 <div style="margin-left: 35%"><object type="image/svg+xml" data="images/aprobado.svg" style="width: 25px; height: 30px"><img src="images/aprobado.svg"></img></object></div>
@@ -90,13 +84,15 @@ if (!array_key_exists('pag', $_GET)) {
                                     <tr>
                                         <th scope="col">Código</th>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">Apellidos</th>
+                                        <th scope="col">Apellido</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Telefono</th> 
                                         <th scope="col">Dirección</th> 
                                         <th scope="col">Ciudad</th> 
                                         <th scope="col">Código postal</th> 
-                                        <th scope="col">Provincia</th> 
+                                        <th scope="col">Provincia</th>
+                                        <th scope="col">Imagen</th> 
+                                        <th scope="col">Password</th> 
                                         <th scope="col">Rol</th>
                                         <th scope="col">Fecha de registro</th> 
                                         <th scope="col">Último acceso</th> 
@@ -124,7 +120,9 @@ if (!array_key_exists('pag', $_GET)) {
                                         . '<td>' . $v[9] . '</td>'
                                         . '<td>' . $v[10] . '</td>'
                                         . '<td>' . $v[11] . '</td>'
-                                        . '<td style="color:darkgreen; font-weight: bolder">' . $v[12] . '</td>'
+                                        . '<td>' . $v[12] . '</td>'
+                                        . '<td>' . $v[13] . '</td>'
+                                        . '<td style="color:darkgreen; font-weight: bolder">' . $v[14] . '</td>'
                                         . '</tr>';
                                     }
                                     ?>
@@ -160,6 +158,59 @@ if (!array_key_exists('pag', $_GET)) {
             </div>
         </div>
 
+        <div id="tablaUserActive"  class="col-auto container-fluid" style="margin-top:2%; display: none">
+            <div class="row">
+                <fieldset class="border p-2">
+                    <div class="form-group">
+                        <div class="flex-container" style="display: flex">
+                            <div style="margin-left: 35%"><object type="image/svg+xml" data="images/aprobado.svg" style="width: 25px; height: 30px"><img src="images/aprobado.svg"></img></object></div>
+                            <div style="align-content:center"><h4 style="color: slategrey; margin-left: 10px">Usuarios de alta en el sistema</h4><br><br></div>
+                        </div>
+                        <table class="table table-hover" >
+                            <thead>
+                                <tr>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Telefono</th> 
+                                    <th scope="col">Dirección</th> 
+                                    <th scope="col">Ciudad</th> 
+                                    <th scope="col">Código postal</th> 
+                                    <th scope="col">Provincia</th>
+                                    <th scope="col">Imagen</th> 
+                                    <th scope="col">Password</th> 
+                                    <th scope="col">Rol</th>
+                                    <th scope="col">Fecha de registro</th> 
+                                    <th scope="col">Último acceso</th> 
+                                    <th scope="col">Status</th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr id="tr_search_user">
+                                    <td id="td_search_user_1"></td>
+                                    <td id="td_search_user_2"></td>
+                                    <td id="td_search_user_3"></td> 
+                                    <td id="td_search_user_4"></td>
+                                    <td id="td_search_user_5"></td>
+                                    <td id="td_search_user_6"></td> 
+                                    <td id="td_search_user_7"></td>
+                                    <td id="td_search_user_8"></td>
+                                    <td id="td_search_user_9"></td> 
+                                    <td id="td_search_user_10"></td>
+                                    <td id="td_search_user_11"></td>
+                                    <td id="td_search_user_12"></td> 
+                                    <td id="td_search_user_13"></td> 
+                                    <td id="td_search_user_14"></td> 
+                                    <td id="td_search_user_15"></td> 
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
 
 
         <?php
@@ -168,6 +219,7 @@ if (!array_key_exists('pag', $_GET)) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <script src="js/responsive_header.js"></script>
+        <script src="js/searchUserActive.js"></script>
 
     </body>
 </html>
