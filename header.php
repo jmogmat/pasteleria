@@ -1,8 +1,14 @@
 <?php
+require_once(__DIR__ . '/autoload.php');
+
+use \conectDB\conectDB as conect;
+
+$db = new conect($_SESSION['rol']);
+?>
+<?php
 require_once 'modalCart.php';
 ?>
 <?php
-
 if (isset($_SESSION['carrito'])) {
 
     $MyCart = $_SESSION['carrito'];
@@ -34,7 +40,6 @@ if (isset($_SESSION['carrito'])) {
                 if (!isset($totalcantidad)) {
 
                     $totalcantidad = '0';
-                    
                 } else {
 
                     $totalcantidad = $totalcantidad;
@@ -70,11 +75,20 @@ if (!isset($totalcantidad)) {
                 <li class="nav-item">
                     <a class="nav-link" href="pasteleria.php">Pastelería</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>                  
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="productsWithoutGluten.php">Productos sin gluten</a>
-                        <a class="dropdown-item" href="productsWithGluten.php">Productos con gluten</a>                     
+
+                        <?php
+                        $categorias = $db->load_categories();
+
+                        foreach ($categorias as $key => $categoria) {
+
+                            echo '<a class="dropdown-item" href="productsCategories.php?cod='.$categoria['id'].'">' . $categoria['nombre_categoria'] . '</a>';
+                        }
+                        ?>                 
+
                     </div>                   
                 </li>  
                 <li class="nav-item"><a class="nav-link" href="blog.php" class="pag_actual">Blog</a></li>

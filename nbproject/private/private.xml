@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/pasteleria/api/addToCart.php</file>
-            <file>file:/C:/xampp/htdocs/pasteleria/panaderia.php</file>
+            <file>file:/C:/xampp/htdocs/pasteleria/userAdminPage.php</file>
             <file>file:/C:/xampp/htdocs/pasteleria/Clases/functions/functions.php</file>
             <file>file:/C:/xampp/htdocs/pasteleria/header.php</file>
-            <file>file:/C:/xampp/htdocs/pasteleria/pasteleria.php</file>
+            <file>file:/C:/xampp/htdocs/pasteleria/productsCategories.php</file>
+            <file>file:/C:/xampp/htdocs/pasteleria/api/updateProduct.php</file>
+            <file>file:/C:/xampp/htdocs/pasteleria/login.php</file>
             <file>file:/C:/xampp/htdocs/pasteleria/Clases/conectDB/conectDB.php</file>
+            <file>file:/C:/xampp/htdocs/pasteleria/editProduct.php</file>
         </group>
     </open-files>
 </project-private>

@@ -561,13 +561,16 @@ class conectDB {
      * @param type $categorie
      * @param type $img
      */
-    function updateProduct($idProduct, $nameProduct, $description, $price, $amount, $categorie, $ruteImage) {
+    function updateProduct($idProduct, $nameProduct, $description, $price, $amount, $categorie, $categories, $ruteImage) {
 
+        $idImg = "";
         $sql1 = 'update Productos set nombre = ?, descripcion= ?, precio= ?, cantidad= ? where id = ?;';
         $sql2 = 'update Categorias_productos set id_categoria= ? where id_producto = ?';
         $sql3 = 'select * from Imagenes as i inner join Productos_Imagenes as pi on pi.id_imagen = i.id where pi.id_producto = ?;';
-        $idImg = "";
         $sql4 = 'update Imagenes set ruta= ? where id = ?;';
+        $sql5 = 'select id_categoria from Categorias_productos where id_producto = ?';
+        $sql6 = 'insert into Categorias_productos(id_producto,id_categoria) values (?,?)';
+        $sql7 = 'delete from Categorias_productos where id_producto = ? and id_categoria = ?';
 
         $db = $this->pdo;
 
@@ -591,28 +594,121 @@ class conectDB {
                 $result2->execute();
             }
 
-            if ($ruteImage != "") {
+            if ($categories != null) {
 
-                if ($result3 = $db->prepare($sql3)) {
+                foreach ($categories as $v) {
 
-                    $result3->bindValue(1, $idProduct);
-                    $result3->execute();
+                    if ($result = $db->prepare($sql5)) {
 
-                    $row = $result3->fetch();
+                        $result->bindValue(1, $idProduct);
+                        $result->execute();
 
-                    $idImg = $row[0];
+                        while ($row = $result->fetch()) {
+
+                            if ($row['id_categoria'] == $v && $row['id_categoria'] != $categorie) {
+
+                                $res = $db->prepare($sql2);
+                                $res->bindValue(1, $v);
+                                $res->bindValue(2, $idProduct);
+                                $res->execute();
+                            }
+                            if ($row['id_categoria'] != $v && $row['id_categoria'] != $categorie) {
+
+                                $r = $db->prepare($sql6);
+                                $r->bindValue(1, $idProduct);
+                                $r->bindValue(2, $v);
+                                $r->execute();
+                            }
+
+                            if ($row['id_categoria'] != $v && $row['id_categoria'] == $row['id_categoria']) {
+
+                                $r = $db->prepare($sql6);
+                                $r->bindValue(1, $idProduct);
+                                $r->bindValue(2, $v);
+                                $r->execute();
+                            }
+                        }
+                    }
+                }
+            } else {
+                if ($consulta = $db->prepare($sql5)) {
+
+                    $consulta->bindValue(1, $idProduct);
+                    $consulta->execute();
+
+                    while ($fila = $consulta->fetch()) {
+
+                        if ($fila['id_categoria'] > '2') {
+
+                            $delete = $db->prepare($sql7);
+                            $delete->bindValue(1, $idProduct);
+                            $delete->bindValue(2, $fila['id_categoria']);
+                            $delete->execute();
+                        }
+                    }
                 }
 
 
-                if ($result4 = $db->prepare($sql4)) {
+                if ($ruteImage != "") {
 
-                    $result4->bindValue(1, $ruteImage);
-                    $result4->bindValue(2, $idImg);
-                    $result4->execute();
+                    if ($result3 = $db->prepare($sql3)) {
+
+                        $result3->bindValue(1, $idProduct);
+                        $result3->execute();
+
+                        $row = $result3->fetch();
+
+                        $idImg = $row[0];
+                    }
+
+
+                    if ($result4 = $db->prepare($sql4)) {
+
+                        $result4->bindValue(1, $ruteImage);
+                        $result4->bindValue(2, $idImg);
+                        $result4->execute();
+                    }
                 }
             }
 
             $db->commit();
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+            $db->rollBack();
+        }
+    }
+
+    function deleteCategorie($idCategorie) {
+
+        $sql = 'delete from Categorias_productos where id_categoria = ?';
+        $sql2 ='delete from Categorias where id = ?';
+        
+        $db = $this->pdo;
+
+        try {
+            
+            $db->beginTransaction();
+            
+            if($idCategorie > 2){
+                
+                if($stmt = $db->prepare($sql)){
+                  
+                  $stmt->bindValue(1, $idCategorie);
+                  $stmt->execute();
+                                     
+                }
+                
+                if($result= $db->prepare($sql2)){
+                    
+                    $result->bindValue(1, $idCategorie);
+                    $result->execute();
+                }
+                
+            }
+            
+                  
+            
+             $db->commit();
         } catch (\Exception $ex) {
             echo $ex->getMessage();
             $db->rollBack();
@@ -702,8 +798,7 @@ class conectDB {
 
     function addCategorie($nameCategorie) {
 
-        $sql1 = 'select count(*) from Categorias';
-        $sql2 = 'insert into Categorias (nombre_categoria) values (?)';
+        $sql = 'insert into Categorias (nombre_categoria) values (?)';
 
         $db = $this->pdo;
 
@@ -711,21 +806,11 @@ class conectDB {
 
             $db->beginTransaction();
 
-            foreach ($result = $db->query($sql1) as $row) {
+            if ($smtp = $db->prepare($sql)) {
 
-                $valor = $row[0];
-            }
+                $smtp->bindValue(1, $nameCategorie);
 
-            if ($valor > 0 && $valor < 2) {
-
-                if ($smtp = $db->prepare($sql2)) {
-
-                    $smtp->bindValue(1, $nameCategorie);
-
-                    $smtp->execute();
-                }
-            } else {
-                return false;
+                $smtp->execute();
             }
 
             $db->commit();
@@ -1302,8 +1387,9 @@ class conectDB {
         }
     }
 
-    function getAllProductsWihtoutGluten() {
-        $sql = 'select * from productos as p inner join categorias_productos as cp on p.id = cp.id_producto where cp.id_categoria = 1 ';
+    function getAllProductsByIdCategorie($codCategorie) {
+
+        $sql = 'select * from Productos as p inner join Categorias_productos as cp on p.id = cp.id_producto where cp.id_categoria = ?';
 
         $db = $this->pdo;
 
@@ -1311,7 +1397,9 @@ class conectDB {
 
         try {
 
-            $smtp = $db->query($sql);
+            $smtp = $db->prepare($sql);
+            $smtp->bindValue(1, $codCategorie);
+            $smtp->execute();
 
             while ($row = $smtp->fetch()) {
 
@@ -1324,32 +1412,9 @@ class conectDB {
         }
     }
 
-    function getAllProductsWithGluten() {
+    function getImgByCodCateorie($codCateorie) {
 
-        $sql = 'select * from productos as p inner join categorias_productos as cp on p.id = cp.id_producto where cp.id_categoria = 2 ';
-
-        $db = $this->pdo;
-
-        $array = array();
-
-        try {
-
-            $smtp = $db->query($sql);
-
-            while ($row = $smtp->fetch()) {
-
-                array_push($array, $row);
-            }
-
-            return $array;
-        } catch (\Exception $ex) {
-            echo $ex->getMessage();
-        }
-    }
-
-    function getImgfromProductsWihoutGluten() {
-
-        $sql = 'select p.id, i.ruta from productos as p inner join categorias_productos as cp on p.id = cp.id_producto inner join productos_imagenes as pi on p.id = pi.id_producto inner join imagenes as i on i.id = pi.id_imagen where cp.id_categoria = 1';
+        $sql = 'select p.id, i.ruta from Productos as p inner join Categorias_productos as cp on p.id = cp.id_producto inner join Productos_Imagenes as pi on p.id = pi.id_producto inner join Imagenes as i on i.id = pi.id_imagen where cp.id_categoria = ?';
 
         $db = $this->pdo;
 
@@ -1357,30 +1422,10 @@ class conectDB {
 
         try {
 
-            $smtp = $db->query($sql);
+            $smtp = $db->prepare($sql);
 
-            while ($row = $smtp->fetch()) {
-
-                array_push($array, $row);
-            }
-
-            return $array;
-        } catch (\Exception $ex) {
-            echo $ex->getMessage();
-        }
-    }
-
-    function getImgfromProductsWihGluten() {
-
-        $sql = 'select p.id, i.ruta from productos as p inner join categorias_productos as cp on p.id = cp.id_producto inner join productos_imagenes as pi on p.id = pi.id_producto inner join imagenes as i on i.id = pi.id_imagen where cp.id_categoria = 2';
-
-        $db = $this->pdo;
-
-        $array = array();
-
-        try {
-
-            $smtp = $db->query($sql);
+            $smtp->bindValue(1, $codCateorie);
+            $smtp->execute();
 
             while ($row = $smtp->fetch()) {
 

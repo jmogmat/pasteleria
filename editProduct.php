@@ -28,23 +28,9 @@ if (isset($_GET['codProduct'])) {
 
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0" />
-        <title>Inicio</title>
-        <!-- Estilos página-->
-        <link rel="stylesheet" href="css/pagina_panaderia.css">
-        <link rel="stylesheet" href="css/panaderia_v2.css">
-        <!-- Sweetalert2 -->
-         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- CSS Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous" />
-        <!-- Iconos Font Awesome--->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-    </head>
+    <?php
+    require_once 'head.php';
+    ?>
     <body style="background-color: whitesmoke">
         <div class="container-flex">
 
@@ -57,7 +43,6 @@ if (isset($_GET['codProduct'])) {
                 <fieldset class="border p-4">
 
                     <?php
-                 
                     if ($arrayProducto[0]['tipo_producto'] == '1') {
                         echo '<h3>Producto de Pastelería</h3>';
                     } else {
@@ -70,9 +55,9 @@ if (isset($_GET['codProduct'])) {
                             <div>
                                 <label>Código tipo de producto</label>
                                 <input type="text" id="codigoProducto" name="codigoTipoProducto" value="<?php echo $arrayProducto[0]['tipo_producto'] ?>" readonly="redonly"></div>
-                                <div style="margin-left: 3%">
-                            <label>Código producto</label>
-                            <input type="text" id="codigoProducto" name="codigoProducto" value="<?php echo $arrayProducto[0]['id'] ?>" readonly="redonly"></div></div><br><br>
+                            <div style="margin-left: 3%">
+                                <label>Código producto</label>
+                                <input type="text" id="codigoProducto" name="codigoProducto" value="<?php echo $arrayProducto[0]['id'] ?>" readonly="redonly"></div></div><br><br>
                         <label>Nombre del producto</label><br>
                         <input type="text" name="nombreProducto" id="nombreProducto"value="<?php echo $arrayProducto[0]['nombre'] ?>" style="width: 100%;" class="p-2"><br><br>
                         <label>Descripción</label><br>
@@ -83,20 +68,64 @@ if (isset($_GET['codProduct'])) {
                         <input type="text" name="cantidad" id="cantidad" value="<?php echo $arrayProducto[0]['cantidad']; ?>" style="width: 100%;" class="p-2"><br><br>
                         <label>Categorias</label><br><br>
                         <?php
-                        $categorias = $db->load_categories();
+                        $arrayCategorias = array();
 
-                        foreach ($categorias as $key => $valor) {
+                        foreach ($categorias as $key => $categoria) {
 
-                            foreach ($arrayProducto as $producto) {
 
-                                if ($producto['nombre_categoria'] == $valor['nombre_categoria']) {
+                            if ($categoria['nombre_categoria'] === 'sin gluten') {
+                                
+
+                                if ($arrayProducto[0]['nombre_categoria'] === $categoria['nombre_categoria']) {
+
 
                                     echo '<div class="form-check">'
-                                    . '<input class="form-check-input" type="radio" id="' . $valor['id'] . '" value="' . $valor['id'] . '" name="categoria" checked><label class="form-check-label" for="checkCategorias">' . $valor['nombre_categoria'] . '</label></div><br>';
+                                    . '<input class="form-check-input" type="radio" id="'
+                                    . $categoria['id'] . '" value="' . $categoria['id'] .
+                                    '" name="categoria" checked><label class="form-check-label" for="categorias">'
+                                    . $categoria['nombre_categoria'] . '</label>'
+                                    . '</div><br>';
                                 } else {
                                     echo '<div class="form-check">'
-                                    . '<input class="form-check-input" type="radio" id="' . $valor['id'] . '" value="' . $valor['id'] . '" name="categoria"><label class="form-check-label" for="checkCategorias">' . $valor['nombre_categoria'] . '</label></div><br>';
+                                    . '<input class="form-check-input" type="radio" id="'
+                                    . $categoria['id'] . '" value="' . $categoria['id'] .
+                                    '" name="categoria"><label class="form-check-label" for="categorias">'
+                                    . $categoria['nombre_categoria'] . '</label>'
+                                    . '</div><br>';
                                 }
+                            }
+
+                            if ($categoria['nombre_categoria'] === 'contiene gluten') {
+
+                                if ($arrayProducto[0]['nombre_categoria'] === $categoria['nombre_categoria']) {
+                                    echo '<div class="form-check">'
+                                    . '<input class="form-check-input" type="radio" id="'
+                                    . $categoria['id'] . '" value="' . $categoria['id'] .
+                                    '" name="categoria" checked><label class="form-check-label" for="categorias">'
+                                    . $categoria['nombre_categoria'] . '</label>'
+                                    . '</div><br>';
+                                } else {
+                                    echo '<div class="form-check">'
+                                    . '<input class="form-check-input" type="radio" id="'
+                                    . $categoria['id'] . '" value="' . $categoria['id'] .
+                                    '" name="categoria"><label class="form-check-label" for="categorias">'
+                                    . $categoria['nombre_categoria'] . '</label>'
+                                    . '</div><br>';
+                                }
+                            }
+                        }
+                        ?>
+                        <?php
+                    
+
+                        foreach ($categorias as $key => $categoria) {
+
+                            if ($categoria['nombre_categoria'] != 'contiene gluten' && $categoria['nombre_categoria'] != 'sin gluten') {
+                                ?>
+
+                        <input type="checkbox" class="form-check-input" <?php foreach($arrayProducto as $v){if(in_array($categoria['nombre_categoria'], $v)){echo 'checked="checked"';}}?> id="<?php echo $categoria['id']; ?>" name="array_categoria[]" value="<?php echo $categoria['id'];?>"><?php echo " " .$categoria['nombre_categoria']?><br><br>
+                                
+                                <?php
                             }
                         }
                         ?>
@@ -120,9 +149,9 @@ if (isset($_GET['codProduct'])) {
             </form>
         </div>
 
-        <?php
-        require_once 'footer.php';
-        ?>
+<?php
+require_once 'footer.php';
+?>
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"crossorigin="anonymous"></script>

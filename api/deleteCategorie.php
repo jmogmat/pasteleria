@@ -11,15 +11,15 @@ $tool->checkSession();
 
 header('Content-type: application/json; charset=utf-8');
 
-if (isset($_POST['nombre_categoria']) && $_POST['nombre_categoria'] != "") {
+if (isset($_POST['cod_categoria']) || $_POST['cod_categoria']) {
 
-    $nameCategorie = $_POST['nombre_categoria'];
+    $codCategorie = trim($_POST['cod_categoria']);
 
     $db = new conect($_SESSION['rol']);
 
-    if (!is_numeric($nameCategorie)) {
+    if (is_numeric($codCategorie)) {
 
-        if (!$db->addCategorie($nameCategorie)) {
+        if (!$db->deleteCategorie($codCategorie)) {
             echo json_encode(['success' => '202']);
             return;
         } else {
@@ -27,13 +27,12 @@ if (isset($_POST['nombre_categoria']) && $_POST['nombre_categoria'] != "") {
             return;
         }
     } else {
-        echo json_encode(['error' => '402', 'msg' => 'El nombre no puede ser numérico!']);
+        echo json_encode(['error' => '402', 'msg' => 'Introduce un número!']);
         return;
     }
 } else {
-    echo json_encode(['error' => '402', 'msg' => 'No dejes el campo vacío!']);
+    echo json_encode(['error' => '402', 'msg' => 'No se ha podido establecer un valor para la solicitud!']);
     return;
 }
 ?>
-
 

@@ -98,7 +98,30 @@ $start = ($_GET['page'] - 1) * $productsByPage;
 
                                 foreach ($categorias as $key => $categoria) {
 
-                                    echo '<div class="form-check"><input class="form-check-input" type="radio" id="' . $categoria['id'] . '" value="' . $categoria['id'] . '" name="categoria" checked><label class="form-check-label" for="categorias">' . $categoria['nombre_categoria'] . '</label></div><br>';
+                                    if ($categoria['nombre_categoria'] === 'sin gluten') {
+
+
+                                        echo '<div class="form-check">'
+                                        . '<input class="form-check-input" type="radio" id="'
+                                        . $categoria['id'] . '" value="' . $categoria['id'] .
+                                        '" name="categoria" checked><label class="form-check-label" for="categorias">'
+                                        . $categoria['nombre_categoria'] . '</label>'
+                                        . '</div><br>';
+                                    }
+
+                                    if ($categoria['nombre_categoria'] === 'contiene gluten') {
+                                        echo '<div class="form-check">'
+                                        . '<input class="form-check-input" type="radio" id="'
+                                        . $categoria['id'] . '" value="' . $categoria['id'] .
+                                        '" name="categoria" checked><label class="form-check-label" for="categorias">'
+                                        . $categoria['nombre_categoria'] . '</label>'
+                                        . '</div><br>';
+                                    }
+
+                                    if ($categoria['nombre_categoria'] != 'contiene gluten' && $categoria['nombre_categoria'] != 'sin gluten') {
+
+                                        echo '<input type="checkbox" class="form-check-input" id="' . $categoria['id'] . '" name="' . $categoria['id'] . '" value="' . $categoria['nombre_categoria'] . '">' . " " . $categoria['nombre_categoria'] . '<br><br>';
+                                    }
                                 }
                                 ?>
                                 <div>
@@ -136,7 +159,7 @@ $start = ($_GET['page'] - 1) * $productsByPage;
                             </fieldset>
                         </form>
                     </div>
-                    <div id="form_add_product" style="margin-top: 8%"> 
+                    <div id="form_add_categorie" style="margin-top: 8%"> 
                         <form id="form_categoria">
                             <fieldset class="border p-2">
                                 <div class="form-group">          
@@ -148,11 +171,34 @@ $start = ($_GET['page'] - 1) * $productsByPage;
                                                 <br><br>
                                             </div>                                 
                                         </div>
-                                        <p style="color: darkgrey; margin-right:5%">* Si ya existen dos categorías, no se permite añadir otra</p>
+
                                         <label>Nombre:</label><br>
                                         <input type="text" class="form-control"  aria-describedby="emailHelp" name="nombre_categoria" id="nombre_categoria" placeholder="Nombre de la categoría"><br><br>
                                         <div style="text-align: center">
                                             <button type="button" class="btn btn-primary mb-2" name="boton_agregar_categoria" id="boton_agregar_categoria" onclick="addCategorie()">Agregar categoría</button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </fieldset>   
+                        </form>   
+                    </div>
+                     <div id="form_delete_categorie" style="margin-top: 8%"> 
+                        <form id="deleteCategorie">
+                            <fieldset class="border p-2">
+                                <div class="form-group">          
+                                    <div class="form-group">
+                                        <div class="flex-container" style="margin: auto ">
+                                            <div style="display: flex;">
+                                                <div style="margin-left: 35%"><object type="image/svg+xml" data="images/papelera.svg" style="width: 25px; height: 30px"><img src="images/papelera.svg"></img></object></div>
+                                                <h4 style="color: royalblue; margin-left: 2%">Borrar una categoría</h4>
+                                                <br><br>
+                                            </div>                                 
+                                        </div>
+
+                                        <label>Nombre:</label><br>
+                                        <input type="text" class="form-control"  aria-describedby="emailHelp" name="cod_categoria" id="cod_categoria" placeholder="Código de la categoría"><br><br>
+                                        <div style="text-align: center">
+                                            <button type="button" class="btn btn-danger mb-2" name="boton_agregar_categoria" id="boton_borrar_categoria" onclick="deleteCategorie()">Borrar categoría</button>
                                         </div>
                                     </div>
                                 </div> 
@@ -219,6 +265,7 @@ $start = ($_GET['page'] - 1) * $productsByPage;
 
                             <?php
                             $products = $db->getAllProducts($start, $productsByPage);
+                            
 
                             foreach ($products as $v) {
 
@@ -306,6 +353,7 @@ $start = ($_GET['page'] - 1) * $productsByPage;
         <script src="js/navFormAdmin.js"></script>
         <script src="js/uploadProduct.js"></script>
         <script src="js/addCategorie.js"></script>
+        <script src="js/deleteCategorie.js"></script>
 
 
         <script>
@@ -321,7 +369,7 @@ $start = ($_GET['page'] - 1) * $productsByPage;
                                         url: 'api/searchProduct.php',
                                         type: 'POST',
                                         data: {
-                                           producto: product
+                                            producto: product
 
                                         },
                                         datatype: 'JSON',
@@ -364,9 +412,6 @@ $start = ($_GET['page'] - 1) * $productsByPage;
                                     })
 
 
-
-
-
                                 }
 
 
@@ -400,8 +445,6 @@ $start = ($_GET['page'] - 1) * $productsByPage;
                                         }
                                     })
                                 }
-
-
 
 
 

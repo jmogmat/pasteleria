@@ -13,7 +13,8 @@ header('Content-type: application/json; charset=utf-8');
 
 $arrayFields = array();
 
-$arrayFields = ['codigoTipoProducto', 'codigoProducto', 'nombreProducto', 'descripcion', 'precio', 'cantidad', 'categoria'];
+
+$arrayFields = ['codigoTipoProducto', 'codigoProducto', 'nombreProducto', 'descripcion', 'precio', 'cantidad'];
 
 if ($tool->checkFieldsForm($arrayFields)) {
 
@@ -24,6 +25,13 @@ if ($tool->checkFieldsForm($arrayFields)) {
     $price = trim($_POST['precio']);
     $amount = trim($_POST['cantidad']);
     $categorie = $_POST['categoria'];
+
+    if (!empty($_POST['array_categoria'])) {
+        
+       $categories = $_POST['array_categoria'];
+
+       
+    }
 
     $db = new conect($_SESSION['rol']);
 
@@ -45,7 +53,7 @@ if ($tool->checkFieldsForm($arrayFields)) {
             if ($tool->uploadImageProduct($_FILES['img'], $codeTypeProduct)) {
 
                 if ($codeTypeProduct == '1') { //El codigo 1 corresponde al tipo de producto de pasteleria, el 2 al de panaderia
-                    if (!$db->updateProduct($idProduct, $nameProduct, $description, $price, $amount, $categorie, $ruteImg1)) {
+                    if (!$db->updateProduct($idProduct, $nameProduct, $description, $price, $amount, $categorie, $categories, $ruteImg1)) {
 
                         echo json_encode(['success' => '202']);
                         return;
@@ -55,7 +63,7 @@ if ($tool->checkFieldsForm($arrayFields)) {
                     }
                 } else {
 
-                    if (!$db->updateProduct($idProduct, $nameProduct, $description, $price, $amount, $categorie, $ruteImg2)) {
+                    if (!$db->updateProduct($idProduct, $nameProduct, $description, $price, $amount, $categorie, $categories, $ruteImg2)) {
 
                         echo json_encode(['success' => '202']);
                         return;
@@ -70,7 +78,7 @@ if ($tool->checkFieldsForm($arrayFields)) {
             }
         } else {
 
-            if (!$db->updateProduct($idProduct, $nameProduct, $description, $price, $amount, $categorie, $ruteImg = "")) {
+            if (!$db->updateProduct($idProduct, $nameProduct, $description, $price, $amount, $categorie, $categories, $ruteImg = "")) {
                 echo json_encode(['success' => '202']);
                 return;
             } else {
