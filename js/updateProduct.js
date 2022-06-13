@@ -13,7 +13,7 @@ function updateProduct() {
                         title: 'Actualizado',
                         text: 'Datos actualizados exitosamente!',
                         confirmButtonText:
-                                'Continuar',
+                                'Continuar'
 
                     }).then((result) => {
 
@@ -21,8 +21,8 @@ function updateProduct() {
                               document.location.reload();
                         }
                     })
-                    // Fin script success
-                    return
+                    
+                    return;
                 }
                 if (data.error && data.msg) {
 
@@ -31,7 +31,7 @@ function updateProduct() {
                         title: 'Ups...algo ha ido mal!',
                         text: data.msg,
                         confirmButtonText:
-                                'Continuar',
+                                'Continuar'
                     })
 
                 }

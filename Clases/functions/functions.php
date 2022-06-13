@@ -71,14 +71,17 @@ class functions {
     }
 
     function checkSession() {
-
+      
+        
         if (session_status() == PHP_SESSION_NONE) { // Comprobamos si NO tenemos una sessión activo
             session_start(); // Iniciamos o recuperamos la información de la sessión actual
 
 
             if (!isset($_SESSION['rol'])) { // Comprobamos si no existe un ROL asignado
                 $_SESSION['rol'] = '3'; // Asignamos el rol por defecto, 3 es el usuario de conexión
-            }
+            } 
+        
+            
         }
     }
 

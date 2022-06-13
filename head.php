@@ -6,6 +6,7 @@
     <link href="/css/bootstrap.min.css"><!-- comment -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous" />
+   
     <!-- CSS Styles Leaflet-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -23,5 +24,7 @@
 
     <!-- Iconos Font Awesome--->
     <script src="https://kit.fontawesome.com/8da8d43521.js" crossorigin="anonymous"></script>
+    
+    
 
 </head>

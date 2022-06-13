@@ -90,8 +90,8 @@ class conectDB {
             }
             $db->commit();
         } catch (\Exception $ex) {
-            echo $ex->getMessage();
             $db->rollBack();
+            echo $ex->getMessage();
         }
     }
 
@@ -681,34 +681,32 @@ class conectDB {
     function deleteCategorie($idCategorie) {
 
         $sql = 'delete from Categorias_productos where id_categoria = ?';
-        $sql2 ='delete from Categorias where id = ?';
-        
+        $sql2 = 'delete from Categorias where id = ?';
+
         $db = $this->pdo;
 
         try {
-            
+
             $db->beginTransaction();
-            
-            if($idCategorie > 2){
-                
-                if($stmt = $db->prepare($sql)){
-                  
-                  $stmt->bindValue(1, $idCategorie);
-                  $stmt->execute();
-                                     
+
+            if ($idCategorie > 2) {
+
+                if ($stmt = $db->prepare($sql)) {
+
+                    $stmt->bindValue(1, $idCategorie);
+                    $stmt->execute();
                 }
-                
-                if($result= $db->prepare($sql2)){
-                    
+
+                if ($result = $db->prepare($sql2)) {
+
                     $result->bindValue(1, $idCategorie);
                     $result->execute();
                 }
-                
             }
-            
-                  
-            
-             $db->commit();
+
+
+
+            $db->commit();
         } catch (\Exception $ex) {
             echo $ex->getMessage();
             $db->rollBack();
@@ -1343,7 +1341,7 @@ class conectDB {
 
     function getImgfromProductsBakery() {
 
-        $sql = 'select i.ruta, p.id from Productos as p inner join productos_imagenes as pi on pi.id_producto = p.id left join imagenes as i on i.id = pi.id_imagen where p.tipo_producto = 2 order by p.id';
+        $sql = 'select i.ruta, p.id from Productos as p inner join Productos_Imagenes as pi on pi.id_producto = p.id left join Imagenes as i on i.id = pi.id_imagen where p.tipo_producto = 2 order by p.id';
 
         $db = $this->pdo;
 
@@ -1366,7 +1364,7 @@ class conectDB {
 
     function getImgfromProductsPastry() {
 
-        $sql = 'select i.ruta, p.id from Productos as p inner join productos_imagenes as pi on pi.id_producto = p.id left join imagenes as i on i.id = pi.id_imagen where p.tipo_producto = 1 order by p.id';
+        $sql = 'select i.ruta, p.id from Productos as p inner join Productos_Imagenes as pi on pi.id_producto = p.id left join Imagenes as i on i.id = pi.id_imagen where p.tipo_producto = 1 order by p.id';
 
         $db = $this->pdo;
 
@@ -1436,6 +1434,105 @@ class conectDB {
         } catch (\Exception $ex) {
             echo $ex->getMessage();
         }
+    }
+
+    function userOrder($idClient, $products) {
+
+        $idOrder = "";
+
+        $sql = "insert into Pedidos_Clientes (cliente,estado) values (?,1)";
+        $sql2 = 'insert into Pedidos_Productos (producto, pedido) values (?,?)';
+        $sql3 = 'select max(id) from Pedidos_Clientes';
+
+        $db = $this->pdo;
+
+        try {
+
+            $db->beginTransaction();
+
+            if ($stmt = $db->prepare($sql)) {
+
+                $stmt->bindValue(1, $idClient);
+
+                if ($stmt->execute()) {
+
+                    if ($res = $db->prepare($sql3)) {
+
+                        $res->execute();
+
+                        $idOrder = $res->fetch();
+                    }
+                } else {
+
+                    $idOrder = 0;
+                    echo $stmt->errorInfo()[2];
+                }
+            }
+
+            foreach ($products as $product) {
+
+                if ($result = $db->prepare($sql2)) {
+
+                    $result->bindValue(1, $product['id']);
+                    $result->bindValue(2, $idOrder[0]);
+                    $result->execute();
+                }
+            }
+
+            $db->commit();
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+            $db->rollBack();
+        }
+    }
+
+    function getOrdersUser($idUser) {
+
+        $sql = 'select pc.id, pp.producto, p.nombre, p.precio, pc.fecha_pedido, pc.estado from Pedidos_Clientes as pc inner join Pedidos_Productos as pp on pp.pedido = pc.id inner join Productos as p on p.id = pp.producto where pc.cliente = ?';
+        $db = $this->pdo;
+        
+        $array = [];
+
+        try {
+            if($stmt = $db->prepare($sql)){
+                
+                $stmt->bindValue(1, $idUser);
+                $stmt->execute();
+                
+                while($row = $stmt->fetch()){
+                    array_push($array, $row);
+                }
+            }
+            
+            return $array;
+            
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+    
+    function getPriceOrder($idUser, $idOrder){
+        
+        $sql = 'select sum(p.precio) from Pedidos_Clientes as pc inner join Pedidos_Productos as pp on pp.pedido = pc.id inner join Productos as p on p.id = pp.producto where pc.cliente = ? and pc.id = ?';
+        $db = $this->pdo;
+        
+
+        try {
+            if($stmt = $db->prepare($sql)){
+                
+                $stmt->bindValue(1, $idUser);
+                $stmt->bindValue(2, $idOrder);
+                $stmt->execute();
+                
+                $row = $stmt->fetch();
+               
+            }
+               return $row;  
+            
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+        
     }
 
 }

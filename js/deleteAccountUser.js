@@ -34,7 +34,7 @@ function deleteAccountUser() {
                     Swal.fire({
                         icon: 'success',
                         title: 'Adiós!',
-                        text: 'Su perfil ha sido borrado satisfactoriamente! Vuelve cuando quieras serás bienvenid@!',
+                        text: 'Su perfil ha sido borrado satisfactoriamente! Vuelve cuando quieras serás bienvenido/a!',
                         confirmButtonText:
                                 'Continuar',
 

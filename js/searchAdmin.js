@@ -1,9 +1,7 @@
 
 function searchAdmin() {
    
-   
-
-   
+    
     var ad = document.getElementById('admin').value;
    
     return $.ajax({

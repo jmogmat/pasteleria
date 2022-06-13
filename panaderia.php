@@ -25,6 +25,8 @@ require_once 'header.php';
 ?>
 
                 <?php
+                
+                
                 $image = '';
 
                 $db = new conect($_SESSION['rol']);
@@ -89,6 +91,7 @@ require_once 'footer.php';
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <script src="js/addToCart.js"></script>
+         
     </body>
 
 </html>

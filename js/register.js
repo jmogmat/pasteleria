@@ -15,7 +15,7 @@ function registerUser() {
                         title: 'Bienvenido...',
                         text: 'Su registro fue exitoso, verifique su cuenta de correo!',
                         confirmButtonText:
-                                'Continuar',
+                                'Continuar'
 
                     }).then((result) => {
 
@@ -23,8 +23,8 @@ function registerUser() {
                             document.location.reload();
                         }
                     })
-                    // Fin script success
-                    return
+                    
+                    return;
                 }
                 if (data.error && data.msg) {
                     

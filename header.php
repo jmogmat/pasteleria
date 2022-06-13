@@ -1,61 +1,37 @@
 <?php
 require_once(__DIR__ . '/autoload.php');
 
+require_once 'modalCart.php';
+
 use \conectDB\conectDB as conect;
 
 $db = new conect($_SESSION['rol']);
-?>
-<?php
-require_once 'modalCart.php';
-?>
-<?php
-if (isset($_SESSION['carrito'])) {
 
-    $MyCart = $_SESSION['carrito'];
+$totalcantidad = "";
 
-// $_SESSION['carrito']=$MyCart;
+if(isset($_SESSION['carrito'])){
+    
+    $carrito = $_SESSION['carrito'];
 }
 
-// contamos nuestro carrito
-if (isset($_SESSION['carrito'])) {
-
-    for ($i = 0; $i <= count($MyCart) - 1; $i++) {
-
-        if (isset($MyCart[$i])) {
-
-            if ($MyCart[$i] != NULL) {
-
-                if (!isset($MyCart['cantidad'])) {
-
-                    $MyCart['cantidad'] = '0';
-                } else {
-
-                    $MyCart['cantidad'] = $MyCart['cantidad'];
-                }
-
-                $total_cantidad = $MyCart['cantidad'];
-
-                $total_cantidad++;
-
-                if (!isset($totalcantidad)) {
-
-                    $totalcantidad = '0';
-                } else {
-
-                    $totalcantidad = $totalcantidad;
-                }
-                $totalcantidad += $total_cantidad;
-            }
-        }
+if(isset($_SESSION['carrito'])){
+    
+    foreach ($_SESSION['carrito'] as $producto){
+        
+        $totalcantidad = ((int)$totalcantidad + (int)$producto['cantidad']);
     }
+    
 }
 
-//declaramos variables
-if (!isset($totalcantidad)) {
-    $totalcantidad = '';
+if(!isset($totalcantidad)){
+    
+    $totalcantidad = "";
+    
 } else {
+    
     $totalcantidad = $totalcantidad;
 }
+
 ?>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -85,7 +61,7 @@ if (!isset($totalcantidad)) {
 
                         foreach ($categorias as $key => $categoria) {
 
-                            echo '<a class="dropdown-item" href="productsCategories.php?cod='.$categoria['id'].'">' . $categoria['nombre_categoria'] . '</a>';
+                            echo '<a class="dropdown-item" href="productsCategories.php?cod=' . $categoria['id'] . '">' . $categoria['nombre_categoria'] . '</a>';
                         }
                         ?>                 
 

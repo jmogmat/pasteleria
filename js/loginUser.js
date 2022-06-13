@@ -8,7 +8,7 @@ function loginUser() {
 
     }).then(response => response.json())
             .then(data => {
-                console.log(data);
+                
                 if (data.success) {
                     Swal.fire({
                         icon: 'success',
@@ -20,12 +20,13 @@ function loginUser() {
                     }).then((result) => {
 
                         if (result.isConfirmed) {
-                            document.location.reload();
+                          
+                           location.href ="./index.php";
 
                         }
                     })
-                    // Fin script success
-                    return
+                   
+                    return;
                 }
                 if (data.error && data.msg) {
 

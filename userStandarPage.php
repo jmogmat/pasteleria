@@ -31,7 +31,7 @@ $userData = $db->getUserData($user_id);
         <!-- CSS Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous" />
         <!-- Iconos Font Awesome--->
-        
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
         <!-- Iconos Font Awesome--->
@@ -46,6 +46,8 @@ $userData = $db->getUserData($user_id);
             #imgUsuario{
                 border-radius:150px;
             }
+
+
         </style>
     </head>
     <body style="background-color: rgb(246,246,246)">
@@ -111,7 +113,7 @@ $userData = $db->getUserData($user_id);
                                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                                     <a class="user_nav nav-link" id="escritorio" role="tab"  onclick="dashboardProfileUser()">Escritorio</a>
                                     <a class="user_nav nav-link" id="cuenta" role="tab" data-toggle="modal" data-target="#modal1">Editar cuenta</a>
-                                    <a class="user_nav nav-link" id="pedidos"  role="tab">Pedidos</a>
+                                    <a class="user_nav nav-link" id="pedidos"  role="tab" onclick="ordersUser()">Pedidos</a>
                                     <a class="user_nav nav-link" id="direccion"  role="tab"  onclick="event.preventDefault();addressBilling()">Dirección</a>
                                     <a class="user_nav nav-link" id="borrar_imagen"  role="tab" onclick="deleteImgUser()">Eliminar imagen de perfil</a>
                                     <input type="text" id="idUsuario" value="<?php echo $user_id; ?>" style="display:none">
@@ -129,7 +131,7 @@ $userData = $db->getUserData($user_id);
                             <p>Hola <?php echo '<b>' . $userData['nombre'] . " " . $userData['apellido'] . '</b>' ?>! Desde el escritorio de tu cuenta puedes ver tus pedidos recientes, gestionar tus direcciones de envío y facturación, editar tu contraseña y los detalles de tu cuenta.</p>
                             <div class="row justify-content-around">                               
                                 <button id="btn2"  class="btn btn-outline-secondary btn-xs col-2" data-toggle="modal" data-target="#modal1">Editar cuenta</button>
-                                <button id="btn3"  class="btn btn-outline-secondary btn-xs col-2">Pedidos</button> 
+                                <button id="btn3"  class="btn btn-outline-secondary btn-xs col-2" onclick="ordersUser()">Pedidos</button> 
                                 <button id="btn4"  class="btn btn-outline-secondary btn-xs col-2" onclick="addressBilling()">Dirección</button>
                                 <button id="btn4"  class="btn btn-outline-secondary btn-xs col-2" onclick="logout()">Salir</button>
                             </div>
@@ -195,7 +197,7 @@ $userData = $db->getUserData($user_id);
                         <label>Las siguientes direcciones se utilizarán por defecto en la página de pago.</label><br><br>
                         <div>
                             <label style="font-weight: bold">Dirección de facturación y envio</label><br><br>
-                            <a id="a_billing" style="text-decoration: none; color: grey;" data-toggle="modal" data-target="#modal2">Editar</a>
+                            <a id="a_billing" style="text-decoration: none; color: grey;cursor: pointer;" data-toggle="modal" data-target="#modal2">Editar</a>
                             <p><?php echo '<i>' . $userData['nombre'] . " " . $userData['apellido'] . '</i>'; ?></p>
                             <p><?php echo '<i>' . $userData['direccion'] . " CP: " . $userData['codigo_postal'] . " " . $userData['ciudad'] . '</i>'; ?></p>
                             <p><?php echo '<i>' . $userData['provincia'] . '</i>'; ?></p>
@@ -243,6 +245,76 @@ $userData = $db->getUserData($user_id);
                         </div>
                     </div>
 
+                    <?php 
+                    
+                    $orders = $db->getOrdersUser($user_id);
+                    
+                    if (!empty($orders)) { ?>
+
+                        <div id="orders" style="display: none">
+
+                            <div id="lista_categoria"  style="margin-top: 8%">
+                                <fieldset class="border p-2">
+                                    <h2 style="margin-top: 0px; text-align: center">Mis pedidos</h2>
+                                    <table class="table table-hover" id="tabla_pedido">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Código del pedido</th>
+                                                <th scope="col">Código producto</th>
+                                                <th sdcope='col'>Nombre producto</th>                                     
+                                                <th sdcope='col'>Precio</th>
+                                                <th sdcope='col'>Fecha pedido</th>
+                                                <th sdcope='col'>Estado del pedido</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $valor = '';
+                                            
+
+                                            foreach ($orders as $key => $valor) {
+                                                ?>
+
+                                                <tr>
+                                                    <td>#<?php echo $valor[0]; ?></td>
+                                                    <td><?php echo $valor[1]; ?></td>
+                                                    <td><?php echo $valor[2]; ?></td>
+                                                    <td><?php echo $valor[3]; ?>€</td>
+                                                    <td><?php echo $valor[4]; ?></td>
+                                                    <?php
+                                                    if ($valor[5] == '1') {
+                                                        $pendiente = 'pendiente de confirmación';
+                                                    } else {
+                                                        $pendiente = 'pedido confirmado';
+                                                    }
+                                                    ?>
+                                                    <td><?php echo $pendiente; ?></td>                                         
+                                                </tr>
+                                                <?php
+                                            }
+
+                                            $totalPrice = $db->getPriceOrder($user_id, $valor[0]);
+                                            ?>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style="color: red; font-weight: bold">Total:</td>
+                                                <td style="font-weight: bold"><?php echo round($totalPrice[0], 2); ?>€</td>                                      
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </div>          
+
+                        </div>
+                        <?php
+                    } else {
+                        
+                    }
+                    ?>
+                    
             </div>
         </fieldset>
     </div>            
@@ -261,7 +333,6 @@ require_once 'footer.php';
 <script src="js/updateAddressUser.js"></script>
 <script src="js/deleteImgUser.js"></script>
 <script src="js/deleteAccountUser.js"></script>
-
 </body>
 </html>
 

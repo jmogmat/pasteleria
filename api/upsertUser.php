@@ -34,14 +34,14 @@ if ($tool->checkFieldsForm($arrayCampos)) {
 
             if ($tool->validateEmail($email) == true) {
 
-                $db->registerUser($name, $surname, $email, $phone, $pass);
+                if (!$db->registerUser($name, $surname, $email, $phone, $pass)) {
 
-                $id = $db->getLastUserId();
+                    echo json_encode(['success' => '202']);
+                    return;
+                }
 
-                $db->sendMailConfirmationRegister($id);
-
-                echo json_encode(['success' => '202']);
-                return;
+                //$id = $db->getLastUserId();
+                //$db->sendMailConfirmationRegister($id); No podemos aplicar esto debido a las restricciones de google gmail
             } else {
                 echo json_encode(['error' => '403', 'msg' => 'El email introducido no es valido!']);
                 return;

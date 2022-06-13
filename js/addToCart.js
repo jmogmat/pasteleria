@@ -12,7 +12,7 @@ function addToCart(id) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Añadido',
-                        text: 'Se ha agregado un elemento al carrito!',
+                        text: 'Se ha agregado un producto al carrito!',
                         confirmButtonText:
                                 'Continuar',
 
